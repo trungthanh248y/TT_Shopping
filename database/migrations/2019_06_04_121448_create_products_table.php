@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->integer('unit_price')->nullable();
             $table->integer('id_event')->nullable();
-            $table->integer('id_parent')->nullable();
+            $table->integer('id_category')->nullable();
             $table->integer('id_user')->nullable();
             $table->timestamps();
         });
