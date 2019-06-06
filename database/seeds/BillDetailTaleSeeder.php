@@ -15,7 +15,7 @@ class BillDetailTaleSeeder extends Seeder
     {
         for($i=0; $i<10; $i++){
             DB::table('bill_detail')->insert([
-                'quantity'=> rand(1, 10),
+                'quantity' => rand(1, 10),
                 'id_bill' => Str::random(10),
                 'id_product' =>Str::random(10),
                 'created_at' => date('Y-m-d H:i:s'),
