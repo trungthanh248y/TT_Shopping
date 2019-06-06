@@ -13,10 +13,10 @@ class EventsTableSeeder extends Seeder
      */
     public function run()
     {
-        for($i=0 ; $i<10;$i++){
+        for($i=0; $i<10; $i++){
             DB::table('events')->insert([
-                'name'=>Str::random(10),
-                'promotion_price'=> rand(10000,1000000),
+                'name' => Str::random(10),
+                'promotion_price' => rand(10000, 1000000),
                 'end_promotion' => date('Y-m-d H:i:s'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
