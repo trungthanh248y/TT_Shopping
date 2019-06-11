@@ -29,3 +29,13 @@ Route::get('/products/edit/{id}', 'ProductController@edit')->name('editProduct')
 Route::post('/products/edit/{id}', 'ProductController@update')->name('updateProduct');
 
 Route::post('/products/delete', 'ProductController@delete')->name('deleteProduct');
+
+Route::get('/indexManage','CreateManageController@index')->name('indexManage');
+
+Route::get('/createManage','CreateManageController@create')->name('createManage');
+Route::post('/storeManage','CreateManageController@store')->name('storeManage');
+
+Route::get('/editManage/{id}','CreateManageController@edit')->name('editManage');
+Route::post('/updateManage/{id}','CreateManageController@update')->name('updateManage');
+
+Route::post('/destroyManage','CreateManageController@destroy')->name('destroyManage');
