@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Product;
-
 class HomeController extends Controller
 {
     /**
@@ -14,7 +14,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
     /**
@@ -24,7 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('home', compact('products'));
+        return view('home');
+    }
+    public function manage()
+    {
+
+        return view('manage');
     }
 }
