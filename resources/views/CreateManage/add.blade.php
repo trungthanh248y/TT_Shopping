@@ -18,7 +18,7 @@
             <input type="text" name="email" class="form-control">
             <label for="text">{{ __('PassWord') }}</label>
             <input type="text" name="password" class="form-control">
-            <input type="submit" value="ADD" class="btn btn-success">
+            <input type="submit" value="{{ __('ADD') }}" class="btn btn-success">
         </form>
     </div>
 
