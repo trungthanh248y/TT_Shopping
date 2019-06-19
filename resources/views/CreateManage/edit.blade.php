@@ -18,7 +18,7 @@
             <input type="text" name="email" class="form-control" value="{{$users->email}}">
             <label for="text">{{ __('PassWord') }}</label>
             <input type="text" name="password" class="form-control" value="{{$users->password}}">
-            <input type="submit" value="Edit" class="btn btn-success">
+            <input type="submit" value="{{ __('Edit') }}" class="btn btn-success">
         </form>
     </div>
 

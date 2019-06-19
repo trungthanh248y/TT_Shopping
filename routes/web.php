@@ -18,25 +18,42 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::middleware('checkmanage')->group(function () {
+    Route::prefix('product')->group(function () {
+        Route::get('/', 'ProductController@index')->name('indexHome');
+
+        Route::get('/add', 'ProductController@create')->name('addProduct');
+        Route::post('/add', 'ProductController@store')->name('storeProduct');
+
+        Route::get('/edit/{id}', 'ProductController@edit')->name('editProduct');
+        Route::post('/edit/{id}', 'ProductController@update')->name('updateProduct');
+
+        Route::post('/delete', 'ProductController@delete')->name('deleteProduct');
+    });
+
+    Route::prefix('event')->group(function () {
+        Route::get('/', 'EventController@index')->name('indexHome');
+
+        Route::get('/add', 'EventController@create')->name('addEvent');
+        Route::post('/add', 'EventController@store')->name('storeEvent');
+
+        Route::get('/edit/{id}', 'EventController@edit')->name('editEvent');
+        Route::post('/edit/{id}', 'EventController@update')->name('updateEvent');
+
+        Route::post('/delete', 'EventController@delete')->name('deleteEvent');
+
+    });
+
+    Route::get('/indexManage','CreateManageController@index')->name('indexManage');
+
+    Route::get('/createManage','CreateManageController@create')->name('createManage');
+    Route::post('/storeManage','CreateManageController@store')->name('storeManage');
+
+    Route::get('/editManage/{id}','CreateManageController@edit')->name('editManage');
+    Route::post('/updateManage/{id}','CreateManageController@update')->name('updateManage');
+
+    Route::post('/destroyManage','CreateManageController@destroy')->name('destroyManage');
+});
+
 Route::get('/home', 'HomeController@index')->name('home')->middleware('checkadmin');
 Route::get('/manage', 'HomeController@manage')->name('manage')->middleware('checkmanage');
-
-Route::get('/product', 'ProductController@index')->name('indexHome');
-
-Route::get('/products/add', 'ProductController@create')->name('addProduct');
-Route::post('/products/add', 'ProductController@store')->name('storeProduct');
-
-Route::get('/products/edit/{id}', 'ProductController@edit')->name('editProduct');
-Route::post('/products/edit/{id}', 'ProductController@update')->name('updateProduct');
-
-Route::post('/products/delete', 'ProductController@delete')->name('deleteProduct');
-
-Route::get('/event', 'EventController@index')->name('indexHome');
-
-Route::get('/events/add', 'EventController@create')->name('addEvent');
-Route::post('/events/add', 'EventController@store')->name('storeEvent');
-
-Route::get('/events/edit/{id}', 'EventController@edit')->name('editEvent');
-Route::post('/events/edit/{id}', 'EventController@update')->name('updateEvent');
-
-Route::post('/events/delete', 'EventController@delete')->name('deleteEvent');

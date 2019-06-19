@@ -46,12 +46,13 @@ class CreateManageController extends Controller
             $users->name = $request->get('name');
             $users->email = $request->get('email');
             $users->password = bcrypt($request->get('password'));
+            $users->role='manage';
             if ($users->save()) {
                 $mess = "success victory";
             }
         }
 
-        return view('CreateManage.add')->with('mess', $mess);
+        return redirect('indexManage')->with('mess', $mess);
     }
 
 
@@ -84,6 +85,7 @@ class CreateManageController extends Controller
             $users->name = $request->get('name');
             $users->email = $request->get('email');
             $users->password = bcrypt($request->get('password'));
+            $users->role='manage';
             if ($users->save()) {
                 $mess = "edit victory";
             }
