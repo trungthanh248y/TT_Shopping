@@ -57,6 +57,6 @@ class EventController extends Controller
     {
         $event = Event::find($request->get('event_id'));
         $event->delete();
-        return redirect('indexHome')->with('mes_del', 'Delete success');
+        return redirect()->route('indexEvent')->with('mes_del', 'Delete success');
     }
 }

@@ -37,6 +37,7 @@
             </select>
             <br>
             <input class="btn btn-success" value="Update Product" type="submit" name="btnsubmit">
+            <a class="btn btn-danger" href="{!! Route('indexProduct') !!}">{{ __('EXIT') }}</a>
         </form>
     </div>
 @endsection

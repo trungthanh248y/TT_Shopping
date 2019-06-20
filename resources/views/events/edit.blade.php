@@ -24,7 +24,7 @@
 
             <br>
             <input class="btn btn-success" value="ADD" type="submit" name="btnsubmit">
-            <a class="btn btn-danger" href="{!! Route('indexHome') !!}">{{ __('EXIT') }}</a>
+            <a class="btn btn-danger" href="{!! Route('indexEvent') !!}">{{ __('EXIT') }}</a>
         </form>
     </div>
 @endsection
