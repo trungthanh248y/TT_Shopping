@@ -34,6 +34,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $categories = $this->categories;
+        $events = $this->events;
         $product = new Product();
         $product->name = $request->get('name');
         $product->description = $request->get('description');
@@ -47,7 +48,7 @@ class ProductController extends Controller
             $mess = "Success add new";
         }
 
-        return view('products.add', compact('categories'))->with('mess', $mess);
+        return view('products.add', compact('categories','events'))->with('mess', $mess);
     }
 
     public function edit($id)
@@ -80,7 +81,7 @@ class ProductController extends Controller
     {
         $product = Product::find($request->get('product_id'));
         $product->delete();
-        return redirect('/product')->with('mes_del', 'Delete success');
+        return redirect()->route('indexProduct')->with('mes_del', 'Delete success');
     }
 }
 

@@ -20,7 +20,7 @@ Auth::routes();
 
 Route::middleware('checkmanage')->group(function () {
     Route::prefix('product')->group(function () {
-        Route::get('/', 'ProductController@index')->name('indexHome');
+        Route::get('/', 'ProductController@index')->name('indexProduct');
 
         Route::get('/add', 'ProductController@create')->name('addProduct');
         Route::post('/add', 'ProductController@store')->name('storeProduct');
@@ -32,7 +32,7 @@ Route::middleware('checkmanage')->group(function () {
     });
 
     Route::prefix('event')->group(function () {
-        Route::get('/', 'EventController@index')->name('indexHome');
+        Route::get('/', 'EventController@index')->name('indexEvent');
 
         Route::get('/add', 'EventController@create')->name('addEvent');
         Route::post('/add', 'EventController@store')->name('storeEvent');
@@ -44,15 +44,21 @@ Route::middleware('checkmanage')->group(function () {
 
     });
 
-    Route::get('/indexManage','CreateManageController@index')->name('indexManage');
+    Route::prefix('comment')->group(function () {
+        Route::get('/', 'CommentController@index')->name('indexComment');
 
-    Route::get('/createManage','CreateManageController@create')->name('createManage');
-    Route::post('/storeManage','CreateManageController@store')->name('storeManage');
+        Route::post('/delete', 'CommentController@delete')->name('deleteComment');
+    });
 
-    Route::get('/editManage/{id}','CreateManageController@edit')->name('editManage');
-    Route::post('/updateManage/{id}','CreateManageController@update')->name('updateManage');
+    Route::get('/indexManage', 'CreateManageController@index')->name('indexManage');
 
-    Route::post('/destroyManage','CreateManageController@destroy')->name('destroyManage');
+    Route::get('/createManage', 'CreateManageController@create')->name('createManage');
+    Route::post('/storeManage', 'CreateManageController@store')->name('storeManage');
+
+    Route::get('/editManage/{id}', 'CreateManageController@edit')->name('editManage');
+    Route::post('/updateManage/{id}', 'CreateManageController@update')->name('updateManage');
+
+    Route::post('/destroyManage', 'CreateManageController@destroy')->name('destroyManage');
 });
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('checkadmin');
