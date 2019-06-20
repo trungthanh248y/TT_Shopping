@@ -44,6 +44,19 @@ Route::middleware('checkmanage')->group(function () {
 
     });
 
+    Route::prefix('bill')->group(function () {
+        Route::get('/', 'BillController@index')->name('indexBill');
+
+        Route::get('/add', 'BillController@create')->name('addBill');
+        Route::post('/add', 'BillController@store')->name('storeBill');
+
+        Route::get('/edit/{id}', 'BillController@edit')->name('editBill');
+        Route::post('/edit/{id}', 'BillController@update')->name('updateBill');
+
+        Route::post('/delete', 'BillController@delete')->name('deleteBill');
+
+    });
+
     Route::prefix('comment')->group(function () {
         Route::get('/', 'CommentController@index')->name('indexComment');
 
