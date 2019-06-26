@@ -11,8 +11,14 @@ class ProductController extends Controller
 {
     public function index()
     {
-
-        $products = Product::paginate(5);
+        $products = Product::with([
+                'event' => function ($query) {
+                    $query->select(['id', 'name']);
+                },
+                'category' => function ($query) {
+                    $query->select(['id', 'name']);
+                }]
+        )->get()->toArray();
 
         return view('products.home', compact('products'));
     }
@@ -50,7 +56,7 @@ class ProductController extends Controller
             $mess = "Success add new";
         }
 
-        return view('products.add', compact('categories','events'))->with('mess', $mess);
+        return view('products.add', compact('categories', 'events'))->with('mess', $mess);
     }
 
     public function edit($id)

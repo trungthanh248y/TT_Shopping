@@ -15,7 +15,8 @@
             <div class="card-header py-3">
                 <form class="d-none d-sm-inline form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
-                        <input type="text" class="form-control bg-light small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control bg-light small" placeholder="Search for..."
+                               aria-label="Search" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
                                 <i class="fas fa-search fa-sm"></i>
@@ -32,7 +33,9 @@
                             <th scope="col">{{ __('ID') }}</th>
                             <th scope="col">{{ __('Name') }}</th>
                             <th scope="col">{{ __('Description') }}</th>
-                            <th scope="col">{{ __('Unit_price')}}</th>
+                            <th scope="col">{{ __('Unit price')}}</th>
+                            <th scope="col">{{ __('Event')}}</th>
+                            <th scope="col">{{ __('Category')}}</th>
                             <th scope="col">{{ __('ADD') }}</th>
                             <th scope="col">{{ __('EDIT') }}</th>
                             <th scope="col">{{ __('DELETE') }}</th>
@@ -42,19 +45,22 @@
                         <tbody>
                         @foreach($products as $product)
                             <tr>
-                                <th scope="row">{!! $product->id !!}</th>
-                                <td>{!! $product->name !!}</td>
-                                <td>{!! $product->description !!}</td>
-                                <td>{!! $product->unit_price !!}</td>
+                                <th scope="row">{!! $product['id'] !!}</th>
+                                <td>{!! $product['name'] !!}</td>
+                                <td>{!! $product['description'] !!}</td>
+                                <td>{!! $product['unit_price'] !!}</td>
+                                <td>{!! $product['event']['name'] !!}</td>
+                                <td>{!! $product['category']['name'] !!}</td>
                                 <td>
                                     <a class="btn btn-success" href="{{Route('addProduct')}}">{{ __('+') }}</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-info" href="{!! Route('editProduct',$product->id) !!}">{{ __('+') }}</a>
+                                    <a class="btn btn-info"
+                                       href="{!! Route('editProduct',$product['id']) !!}">{{ __('+') }}</a>
                                 </td>
                                 <td>
                                     <form action="{!! Route('deleteProduct') !!}" method="post">
-                                        <input type="hidden" name="product_id" value="{!! $product->id !!}">
+                                        <input type="hidden" name="product_id" value="{!! $product['id'] !!}">
                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                                         <input type="submit" value="+" class="btn btn-danger">
                                     </form>
@@ -64,17 +70,17 @@
                         </tbody>
                     </table>
                 </div>
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <!-- Sidebar Toggle (Topbar) -->
+{{--                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">--}}
+{{--                    <!-- Sidebar Toggle (Topbar) -->--}}
 
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                           <div>{{ $products->links() }}</div>
-                        </li>
+{{--                    <ul class="navbar-nav ml-auto">--}}
+{{--                        <!-- Nav Item - User Information -->--}}
+{{--                        <li class="nav-item dropdown no-arrow">--}}
+{{--                            <div>{{ $products->links() }}</div>--}}
+{{--                        </li>--}}
 
-                    </ul>
-                </nav>
+{{--                    </ul>--}}
+{{--                </nav>--}}
             </div>
         </div>
 
