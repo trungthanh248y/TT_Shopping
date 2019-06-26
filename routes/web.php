@@ -18,6 +18,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
 Route::middleware('checkmanage')->group(function () {
     Route::prefix('product')->group(function () {
         Route::get('/', 'ProductController@index')->name('indexProduct');
