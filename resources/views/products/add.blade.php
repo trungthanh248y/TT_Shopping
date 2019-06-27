@@ -11,7 +11,7 @@
                 <p class="alert alert-danger">{{$error}}</p>
             @endforeach
         @endif
-        <form action="{!! Route('storeProduct') !!}" method="post">
+        <form action="{!! Route('storeProduct') !!}" method="post" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <label>{{ __('Name') }}</label>
             <input type="text" name="name" class="form-control">
@@ -36,6 +36,9 @@
                 @endforeach
             </select>
             <br>
+
+            <input type="file" name="image"><br>
+
             <input class="btn btn-success" value="ADD" type="submit" name="btnsubmit">
             <a class="btn btn-danger" href="{!! Route('indexProduct') !!}">{{ __('EXIT') }}</a>
         </form>

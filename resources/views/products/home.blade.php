@@ -70,17 +70,6 @@
                         </tbody>
                     </table>
                 </div>
-{{--                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">--}}
-{{--                    <!-- Sidebar Toggle (Topbar) -->--}}
-
-{{--                    <ul class="navbar-nav ml-auto">--}}
-{{--                        <!-- Nav Item - User Information -->--}}
-{{--                        <li class="nav-item dropdown no-arrow">--}}
-{{--                            <div>{{ $products->links() }}</div>--}}
-{{--                        </li>--}}
-
-{{--                    </ul>--}}
-{{--                </nav>--}}
             </div>
         </div>
 

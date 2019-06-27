@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Image;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
@@ -11,6 +12,7 @@ class ProductController extends Controller
 {
     public function index()
     {
+
         $products = Product::with
         (
             [
@@ -19,8 +21,7 @@ class ProductController extends Controller
                 },
                 'category' => function ($query) {
                     $query->select(['id', 'name']);
-                }
-            ]
+                }]
         )->get()->toArray();
 
         return view('products.home', compact('products'));
@@ -39,27 +40,46 @@ class ProductController extends Controller
     {
         $categories = $this->categories;
         $events = $this->events;
+
         return view('products.add', compact('categories', 'events'));
+
     }
 
     public function store(Request $request)
     {
         $categories = $this->categories;
         $events = $this->events;
-        $product = new Product();
-        $product->name = $request->get('name');
-        $product->description = $request->get('description');
-        $product->unit_price = $request->get('unit_price');
-        $product->id_category = $request->get('id_category');
-        $product->id_category = $request->get('id_category');
-        $product->id_category = $request->get('id_category');
-        $product->id_event = $request->get('id_event');
-        $mess = "";
-        if ($product->save()) {
-            $mess = "Success add new";
+
+        $imageis = Product::with(['images' => function ($query) {
+            $query->select(['id_product', 'name']);
+        }])->get()->toArray();
+
+        $images = new Image();
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = $image->getClientOriginalName();
+            $location = $image->move(public_path() . '/images/', $filename);
+
+            $product = new Product();
+            $product->name = $request->get('name');
+            $product->description = $request->get('description');
+            $product->unit_price = $request->get('unit_price');
+            $product->id_category = $request->get('id_category');
+
+            $product->id_event = $request->get('id_event');
+
+            $images->name = $filename;
+            $mess = "";
+            if ($product->save()) {
+                $images->id_product = $product->id;
+                $images->save();
+                $mess = "{{ __('Success add new') }}";
+            }
+            return view('products.add', compact('categories', 'events'))->with('mess', $mess);
+
         }
 
-        return view('products.add', compact('categories', 'events'))->with('mess', $mess);
     }
 
     public function edit($id)
@@ -67,6 +87,7 @@ class ProductController extends Controller
         $categories = $this->categories;
         $events = $this->events;
         $product = Product::find($id);
+
         return view('products.edit', compact('categories', 'product', 'events'));
     }
 
@@ -74,25 +95,40 @@ class ProductController extends Controller
     {
         $categories = $this->categories;
         $events = $this->events;
-        $product = Product::find($id);
-        $product->name = $request->get('name');
-        $product->description = $request->get('description');
-        $product->unit_price = $request->get('unit_price');
-        $product->id_category = $request->get('id_category');
-        $product->id_event = $request->get('id_event');
-        $mess = "";
-        if ($product->save()) {
-            $mess = "Success edit";
-        }
 
-        return view('products.edit', compact('categories', 'product', 'events'))->with('mess', $mess);
+        $mess = "";
+
+        $images = Image::where('id_product',$id)->first();
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = $image->getClientOriginalName();
+            $location = $image->move(public_path() . '/images/', $filename);
+
+            $product = Product::find($id);
+            $product->name = $request->get('name');
+            $product->description = $request->get('description');
+            $product->unit_price = $request->get('unit_price');
+            $product->id_category = $request->get('id_category');
+            $product->id_event = $request->get('id_event');
+
+            $images->name = $filename;
+            if ($product->save()) {
+                $images->id_product = $product->id;
+
+                $images->save();
+                $mess = "{{ __('Success edit') }}";
+            }
+
+            return view('products.edit', compact('categories', 'product', 'events'))->with('mess', $mess);
+        }
     }
 
     public function delete(Request $request)
     {
         $product = Product::find($request->get('product_id'));
         $product->delete();
-        return redirect()->route('indexProduct')->with('mes_del', 'Delete success');
+        return redirect()->route('indexProduct')->with('mes_del', "{{ __('Delete success') }}");
     }
 }
 
