@@ -11,13 +11,16 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with([
+        $products = Product::with
+        (
+            [
                 'event' => function ($query) {
                     $query->select(['id', 'name']);
                 },
                 'category' => function ($query) {
                     $query->select(['id', 'name']);
-                }]
+                }
+            ]
         )->get()->toArray();
 
         return view('products.home', compact('products'));
