@@ -16,8 +16,8 @@ class CreateBillDetailTable extends Migration
         Schema::create('bill_detail', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('quantity')->nullable();
-            $table->string('id_bill')->nullable();
-            $table->string('id_product')->nullable();
+            $table->integer('id_bill')->nullable();
+            $table->integer('id_product')->nullable();
             $table->timestamps();
         });
     }
