@@ -38,7 +38,6 @@
                             <th scope="col">{{ __('Category')}}</th>
                             <th scope="col">{{ __('ADD') }}</th>
                             <th scope="col">{{ __('EDIT') }}</th>
-                            <th scope="col">{{ __('DELETE') }}</th>
 
                         </tr>
                         </thead>
@@ -52,17 +51,17 @@
                                 <td>{!! $product['event']['name'] !!}</td>
                                 <td>{!! $product['category']['name'] !!}</td>
                                 <td>
-                                    <a class="btn btn-success" href="{{Route('addProduct')}}">{{ __('+') }}</a>
+                                    <a class="btn btn-success" href="{{Route('addProduct')}}"><i class="fas fa-plus"></i></a>
                                 </td>
                                 <td>
                                     <a class="btn btn-info"
-                                       href="{!! Route('editProduct',$product['id']) !!}">{{ __('+') }}</a>
+                                       href="{!! Route('editProduct',$product['id']) !!}"><i class="fas fa-edit"></i></a>
                                 </td>
                                 <td>
                                     <form action="{!! Route('deleteProduct') !!}" method="post">
                                         <input type="hidden" name="product_id" value="{!! $product['id'] !!}">
                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                        <input type="submit" value="+" class="btn btn-danger">
+                                        <input type="submit" value="Delete" class="btn btn-danger">
                                     </form>
                                 </td>
                             </tr>

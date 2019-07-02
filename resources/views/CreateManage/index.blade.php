@@ -36,7 +36,6 @@
                             <th scope="col">{{ __('Password') }}</th>
                             <th scope="col">{{ __('ADD') }}</th>
                             <th scope="col">{{ __('EDIT') }}</th>
-                            <th scope="col">{{ __('DELETE') }}</th>
 
                         </tr>
                         </thead>
@@ -48,16 +47,16 @@
                                 <td>{!! $user->email !!}</td>
                                 <td>{!! $user->password !!}</td>
                                 <td>
-                                    <a class="btn btn-success" href="{{Route('createManage')}}">{{ __('+') }}</a>
+                                    <a class="btn btn-success" href="{{Route('createManage')}}"><i class="fas fa-user-plus"></i></a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-info" href="{!! Route('editManage',$user->id) !!}">{{ __('+') }}</a>
+                                    <a class="btn btn-info" href="{!! Route('editManage',$user->id) !!}"><i class="fas fa-user-edit"></i></a>
                                 </td>
                                 <td>
                                     <form action='{{Route('destroyManage',$user->id)}}' method="post">
                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                                         <input type="hidden" name="id" value="{{$user->id}}">
-                                        <input type="submit" class="btn btn-danger" value="{{ __('+') }}">
+                                        <input type="submit" class="btn btn-danger" value="Delete">
                                     </form>
                                 </td>
                             </tr>
