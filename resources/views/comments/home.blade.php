@@ -24,7 +24,7 @@
                     <tr>
                         <th scope="row">{!! $comment['id'] !!}</th>
                         <td>{!! $comment['content'] !!}</td>
-                        <td>{!! $comment['product']['name'] !!}</td>
+                        <td><a href="{{Route('editProduct', $comment['product']['id'])}}">{!! $comment['product']['name'] !!}</a></td>
                         <td>
                             <form action="{!! Route('deleteComment') !!}" method="post">
                                 <input type="hidden" name="comment_id" value="{!! $comment['id'] !!}">
