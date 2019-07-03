@@ -19,6 +19,9 @@ class ProductController extends Controller
                 'event' => function ($query) {
                     $query->select(['id', 'name']);
                 },
+                'images' => function ($query) {
+                    $query->select(['id_product', 'name']);
+                },
                 'category' => function ($query) {
                     $query->select(['id', 'name']);
                 }]
@@ -129,6 +132,13 @@ class ProductController extends Controller
         $product = Product::find($request->get('product_id'));
         $product->delete();
         return redirect()->route('indexProduct')->with('mes_del', "{{ __('Delete success') }}");
+    }
+
+
+    public function ProductAllWelcome(){
+        $products=Product::all();
+        dd($products);
+        return view('welcome',compact('products'));
     }
 }
 
