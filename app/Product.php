@@ -17,7 +17,7 @@ class Product extends Model
         return $this->hasMany('App\Bill_Detail', 'id_product', 'id');
     }
 
-    public function categories()
+    public function category()
     {
 
         return $this->belongsTo('App\Category', 'id_category', 'id');
@@ -29,7 +29,7 @@ class Product extends Model
         return $this->hasMany('App\Image', 'id_product', 'id');
     }
 
-    public function events()
+    public function event()
     {
 
         return $this->belongsTo('App\Event', 'id_event', 'id');
