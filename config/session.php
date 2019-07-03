@@ -30,6 +30,7 @@ return [
     */
 
     'lifetime' => env('SESSION_LIFETIME', 120),
+    //thời gian tồn tại của session mặc định là 120 phút
 
     'expire_on_close' => false,
 

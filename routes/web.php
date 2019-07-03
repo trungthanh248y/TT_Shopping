@@ -75,5 +75,7 @@ Route::middleware('checkmanage')->group(function () {
     Route::post('/destroyManage', 'CreateManageController@destroy')->name('destroyManage');
 });
 
+
+
 Route::get('/home', 'HomeController@index')->name('home')->middleware('checkadmin');
 Route::get('/manage', 'HomeController@manage')->name('manage')->middleware('checkmanage');
