@@ -1,3 +1,5 @@
+<script src = "./path/to/dropzone.js" ></script >
+
 @extends('master')
 @section('title','create new product')
 @section('content')
@@ -11,7 +13,8 @@
                 <p class="alert alert-danger">{{$error}}</p>
             @endforeach
         @endif
-        <form action="{!! Route('storeProduct') !!}" method="post" enctype="multipart/form-data">
+        <form action="{!! Route('storeProduct') !!}" method="post" enctype="multipart/form-data" class = "dropzone">
+{{--             enctype="multipart/form-data"--}}
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <label>{{ __('Name') }}</label>
             <input type="text" name="name" class="form-control">
@@ -36,8 +39,9 @@
                 @endforeach
             </select>
             <br>
-
-            <input type="file" name="image"><br>
+            <div class="fallback">
+                <input name = "file[]" type = "file" multiple/>
+            </div>
 
             <input class="btn btn-success" value="ADD" type="submit" name="btnsubmit">
             <a class="btn btn-danger" href="{!! Route('indexProduct') !!}">{{ __('EXIT') }}</a>

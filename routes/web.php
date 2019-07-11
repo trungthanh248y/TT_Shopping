@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/', 'ProductController@ProductAllWelcome')->name('welcome');
 
 
 Auth::routes();
@@ -64,6 +65,10 @@ Route::middleware('checkmanage')->group(function () {
         Route::post('/delete', 'CommentController@delete')->name('deleteComment');
     });
 
+    Route::prefix('category')->group(function () {
+        Route::get('/', 'CategoryController@index')->name('indexCategory');
+    });
+
     Route::get('/indexManage', 'CreateManageController@index')->name('indexManage');
 
     Route::get('/createManage', 'CreateManageController@create')->name('createManage');
@@ -75,7 +80,11 @@ Route::middleware('checkmanage')->group(function () {
     Route::post('/destroyManage', 'CreateManageController@destroy')->name('destroyManage');
 });
 
+Route::prefix('ShoppingCart')->group(function () {
+    Route::get('/add/{id}', 'ShopingCartController@add')->name('addCart');
 
+    Route::post('/delete', 'ShopingCartController@delete')->name('deleteCart');
+});
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('checkadmin');
 Route::get('/manage', 'HomeController@manage')->name('manage')->middleware('checkmanage');
