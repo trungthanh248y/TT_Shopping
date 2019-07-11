@@ -57,7 +57,10 @@
                                     @if(count($product['images']) == 0)
                                         no image
                                     @else
-                                        <img class="img-rounded corners" style="width: 300px; height:100px" src="{{ asset('images/'.((count($product['images'])!=0) ? ($product['images'][0]['name']): 'K co anh')) }}" alt="">
+                                        <?php $image=($product['images']);?>
+                                        @foreach ($image as $images)
+                                            <img class="img-rounded corners" style="width: 300px; height:100px" src="{{ asset('images/'.((count($product['images'])!=0) ? ($images['name']): 'K co anh')) }}" alt="">
+                                        @endforeach
                                     @endif
                                 </td>
                                 <td>
