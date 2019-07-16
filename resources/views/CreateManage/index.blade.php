@@ -26,6 +26,7 @@
                 </form>
             </div>
             <div class="card-body">
+                <a class="btn btn-success" href="{{Route('createManage')}}">{{ __('ADD') }} <i class="fas fa-user-plus"></i></a>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -34,7 +35,6 @@
                             <th scope="col">{{ __('Name') }}</th>
                             <th scope="col">{{ __('Email') }}</th>
                             <th scope="col">{{ __('Password') }}</th>
-                            <th scope="col">{{ __('ADD') }}</th>
                             <th scope="col">{{ __('EDIT') }}</th>
 
                         </tr>
@@ -46,9 +46,6 @@
                                 <td>{!! $user->name !!}</td>
                                 <td>{!! $user->email !!}</td>
                                 <td>{!! $user->password !!}</td>
-                                <td>
-                                    <a class="btn btn-success" href="{{Route('createManage')}}"><i class="fas fa-user-plus"></i></a>
-                                </td>
                                 <td>
                                     <a class="btn btn-info" href="{!! Route('editManage',$user->id) !!}"><i class="fas fa-user-edit"></i></a>
                                 </td>

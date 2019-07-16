@@ -26,6 +26,7 @@
                 </form>
             </div>
             <div class="card-body">
+                <a class="btn btn-success" href="{{Route('addProduct')}}">{{ __('ADD') }}   <i class="fas fa-plus"></i></a>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -37,7 +38,6 @@
                             <th scope="col">{{ __('Event')}}</th>
                             <th scope="col">{{ __('Category')}}</th>
                             <th scope="col">{{ __('Image')}}</th>
-                            <th scope="col">{{ __('ADD') }}</th>
                             <th scope="col">{{ __('EDIT') }}</th>
                             <th scope="col">{{ __('DELETE') }}</th>
 
@@ -64,9 +64,6 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a class="btn btn-success" href="{{Route('addProduct')}}"><i class="fas fa-plus"></i></a>
-                                </td>
-                                <td>
                                     <a class="btn btn-info"
                                        href="{!! Route('editProduct',$product['id']) !!}"><i class="fas fa-edit"></i></a>
                                 </td>
@@ -88,3 +85,4 @@
     </div>
     </body>
 @endsection
+
