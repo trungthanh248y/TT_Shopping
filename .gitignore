@@ -13,6 +13,7 @@ public/css
 public/js
 public/fontawesome-free-5.9.0-web
 public/hot
+public/images
 storage/*.key
 .env.*.php
 .env.php

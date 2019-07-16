@@ -102,29 +102,56 @@ class ProductController extends Controller
 
         $mess = "";
 
-        $images = Image::where('id_product', $id)->first();
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = $image->getClientOriginalName();
-            $location = $image->move(public_path() . '/images/', $filename);
-
-            $product = Product::find($id);
+////        $images = Image::where('id_product', $id)->first();
+////
+////        if ($request->hasFile('image')) {
+////            $image = $request->file('image');
+////            $filename = $image->getClientOriginalName();
+////            $location = $image->move(public_path() . '/images/', $filename);
+////
+////            $product = Product::find($id);
+////            $product->name = $request->get('name');
+////            $product->description = $request->get('description');
+////            $product->unit_price = $request->get('unit_price');
+////            $product->id_category = $request->get('id_category');
+////            $product->id_event = $request->get('id_event');
+////
+////            $images->name = $filename;
+////            if ($product->save()) {
+////                $images->id_product = $product->id;
+////
+////                $images->save();
+////                $mess = "{{ __('Success edit') }}";
+////            }
+////
+//            return view('products.edit', compact('categories', 'product', 'events'))->with('mess', $mess);
+//        }
+        $image = $request->file;
+        if (count($image) != 0) {
+            $product = new Product();
             $product->name = $request->get('name');
             $product->description = $request->get('description');
             $product->unit_price = $request->get('unit_price');
             $product->id_category = $request->get('id_category');
+
             $product->id_event = $request->get('id_event');
 
-            $images->name = $filename;
+            $mess = "";
             if ($product->save()) {
-                $images->id_product = $product->id;
+                foreach ($image as $k => $v) {
+                    $images = new Image();
 
-                $images->save();
-                $mess = "{{ __('Success edit') }}";
+                    $filename = $v->getClientOriginalName();
+                    $location = $v->move(public_path() . '/images/', $filename);
+
+                    $images->name = $filename;
+                    $images->id_product = $product->id;
+                    $images->save();
+                }
+                $mess = "{{ __('Success add new') }}";
             }
+            return view('products.add', compact('categories', 'events'))->with('mess', $mess);
 
-            return view('products.edit', compact('categories', 'product', 'events'))->with('mess', $mess);
         }
     }
 

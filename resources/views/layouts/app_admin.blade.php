@@ -67,6 +67,11 @@
                 <i class="fas fa-user"></i>
                 <span>{{ __('Quản lý nhân viên') }}</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{Route('indexComment')}}">
+                <i class="fas fa-comment"></i>
+                <span>{{ __('Quản lý comments') }}</span></a>
+        </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
         <!-- Sidebar Toggler (Sidebar) -->
