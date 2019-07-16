@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::get('/', 'ProductController@ProductAllWelcome')->name('welcome');
 
 
@@ -88,3 +86,4 @@ Route::prefix('ShoppingCart')->group(function () {
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('checkadmin');
 Route::get('/manage', 'HomeController@manage')->name('manage')->middleware('checkmanage');
+Route::get('/','HomeController@welcome')->name('welcome');
