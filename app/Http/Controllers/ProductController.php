@@ -71,7 +71,7 @@ class ProductController extends Controller
             $mess = "";
             if ($product->save()) {
                 foreach ($image as $k => $v) {
-                    $images = new Image();
+                    $images = new Image();//phải tạo ảnh ở đây vì với mỗi ảnh cần lưu vào hàng, nếu k có thì nó sẽ ghi đè lên
 
                     $filename = $v->getClientOriginalName();
                     $location = $v->move(public_path() . '/images/', $filename);
@@ -102,12 +102,8 @@ class ProductController extends Controller
 
         $mess = "";
 
-        $images = Image::where('id_product', $id)->first();
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = $image->getClientOriginalName();
-            $location = $image->move(public_path() . '/images/', $filename);
+        $image = $request->file;
+        if (count($image) != 0) {
 
             $product = Product::find($id);
             $product->name = $request->get('name');
@@ -116,22 +112,35 @@ class ProductController extends Controller
             $product->id_category = $request->get('id_category');
             $product->id_event = $request->get('id_event');
 
-            $images->name = $filename;
             if ($product->save()) {
-                $images->id_product = $product->id;
 
-                $images->save();
-                $mess = "{{ __('Success edit') }}";
+                $images = Image::where('id_product', $id)->delete();
+
+                foreach ($image as $k => $v) {
+
+                    $images = new Image();
+
+                    $filename = $v->getClientOriginalName();
+                    $location = $v->move(public_path() . '/images/', $filename);
+
+                    $images->name = $filename;
+                    $images->id_product = $product->id;
+                    $images->save();
+                    $mess = "{{ __('Success edit') }}";
+                }
+
+                return view('products.edit', compact('categories', 'product', 'events'))->with('mess', $mess);
             }
-
-            return view('products.edit', compact('categories', 'product', 'events'))->with('mess', $mess);
         }
     }
 
     public function delete(Request $request)
     {
         $product = Product::find($request->get('product_id'));
-        $product->delete();
+        if($product->delete()){
+            $images = Image::where('id_product',$request->get('product_id'))->delete();
+        }
+
         return redirect()->route('indexProduct')->with('mes_del', "{{ __('Delete success') }}");
     }
 
@@ -149,6 +158,7 @@ class ProductController extends Controller
                 }
             ]
         )->get()->toArray();
+
         return view('welcome', compact('products'));
     }
 }
