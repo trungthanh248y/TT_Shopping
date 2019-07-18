@@ -8,30 +8,57 @@ use App\Category;
 class CategoryController extends Controller
 {
     //
-    public $arr;
-
-    public function __construct()
-    {
-        $this->arr = Category::all();
-    }
-
     public function index()
     {
-        $this->CategoryTre($this->arr);
+        $categories=Category::all();
+        return view('categories.home', compact('categories'));
     }
 
-    public function CategoryTre($arr, $parent = 0, $indent = 0)
+    public function create()
     {
-        if (count($arr) != 0) {
-            foreach ($arr as $item) {
-                if ($item["id_parent"] == $parent) {
-                    if ($indent != 0) {
-                        echo str_repeat("&nbsp;", $indent) . "-&nbsp;";
-                    }
-                    echo $item['name'] . $item['id'] . '<br/>';
-                    $this->CategoryTre($arr, $item['id'], $indent + 2);
-                }
-            }
-        }
+        return view('categories.add', compact('categories'));
     }
+
+    public function store(Request $request)
+    {
+        $category = new Category();
+        $category->name = $request->get('name');
+        $category->link = $request->get('link');
+        $category->id_parent = $request->get('id_parent');
+        $mess = "";
+        if ($category->save()) {
+            $mess = "Success add new";
+        }
+
+        return view('categories.add', compact('category'))->with('mess', $mess);
+    }
+
+    public function edit($id)
+    {
+        $category = Category::find($id);
+        return view('categories.edit', compact('category'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $category = Category::find($id);
+        $category->name = $request->get('name');
+        $category->link = $request->get('link');
+        $category->id_parent = $request->get('id_parent');
+        $mess = "";
+        if ($category->save()) {
+            $mess = "Success edit";
+        }
+
+        return view('categories.edit', compact('category'))->with('mess', $mess);
+    }
+
+    public function delete(Request $request)
+    {
+        $category = Category::find($request->get('category_id'));
+        $category->delete();
+        return redirect()->route('indexCategory')->with('mes_del', 'Delete success');
+    }
+
+
 }

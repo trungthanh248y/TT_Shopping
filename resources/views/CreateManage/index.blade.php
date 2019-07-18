@@ -53,7 +53,7 @@
                                     <form action='{{Route('destroyManage',$user->id)}}' method="post">
                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                                         <input type="hidden" name="id" value="{{$user->id}}">
-                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                        <input type="submit" class="btn btn-danger" value="X">
                                     </form>
                                 </td>
                             </tr>

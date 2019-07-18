@@ -57,6 +57,19 @@ Route::middleware('checkmanage')->group(function () {
 
     });
 
+    Route::prefix('category')->group(function () {
+        Route::get('/', 'CategoryController@index')->name('indexCategory');
+
+        Route::get('/add', 'CategoryController@create')->name('addCategory');
+        Route::post('/add', 'CategoryController@store')->name('storeCategory');
+
+        Route::get('/edit/{id}', 'CategoryController@edit')->name('editCategory');
+        Route::post('/edit/{id}', 'CategoryController@update')->name('updateCategory');
+
+        Route::post('/delete', 'CategoryController@delete')->name('deleteCategory');
+
+    });
+
     Route::prefix('comment')->group(function () {
         Route::get('/', 'CommentController@index')->name('indexComment');
 
