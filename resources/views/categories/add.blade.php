@@ -1,8 +1,8 @@
 @extends('master')
-@section('title','create new event')
+@section('title','create new category')
 @section('content')
     <div class="container">
-        <h3><p>{{ __('ADD NEW EVENT') }}</p></h3>
+        <h3><p>{{ __('ADD NEW Category') }}</p></h3>
         @if(isset($mess))
             <p class="alert alert-success">{!! $mess !!}</p>
         @endif
@@ -11,7 +11,7 @@
                 <p class="alert alert-danger">{{$error}}</p>
             @endforeach
         @endif
-        <form action="{!! Route('storeEvent') !!}" method="post">
+        <form action="{!! Route('storeCategory!!}" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <label>{{ __('Name') }}</label>
             <input type="text" name="name" class="form-control">
