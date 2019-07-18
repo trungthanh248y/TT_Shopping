@@ -39,6 +39,51 @@
             </div>
         </div>
     </section>
+
+{{--    gioi hang--}}
+    <div class="beta-comp">
+        <div class="cart">
+            <div class="beta-select"><i class="fa fa-shopping-cart"></i>
+                    Gio Hang(@if(Session::has('cart')){{Session('cart')->totalQty}})<i class="fa fa-chevron-down">
+                    @else Trong) @endif
+                    </i></div>
+                    @if(Session::has('cart'))
+
+                        <?php //dd(Session::get('cart')) ?>{{--Kiểm tra xem đã có sản phẩm trong giỏ hàng hay chưa--}}
+                    @foreach($product_cart as $product)
+                        <div class="cart-item">
+                            {{--                                                    nut xoa khoi gio hang--}}
+
+                            <a href="{{Route('xoagiohang',$product['item']['id'])}}" class="cart-item-delete">
+                                <i class="fa fa-times">Xoa gio hang</i></a>
+
+                            {{--                                                    ket thuc nut xoa gio hang--}}
+                            <div class="media">
+                                <a href="#" class="pull-left"><img src="{{asset('images/'.$product['item']['image'])}}" alt=""></a>
+                                <div class="media-body">
+                                    <span class="cart-item-title">{{$product['item']['name']}}</span>
+                                    <span class="cart-item-amount">{{$product['qty']}}*<span>@if($product['item']->event == null)
+                                                {{number_format($product['item']['unit_price'])}}@else{{number_format($product['item']->event['promotion_price'])}}@endif
+                                            (<span>{{$product['item']['id_event']}}</span>)</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                        <div class="cart-caption">
+                            <br>
+                            <div class="cart-total text-right">Tong Tien: <span class="cart-total-value">{{number_format(Session('cart')->totalPrice)}}</span></div>
+                            <div class="clearfix"></div>
+                            <div class="center">
+                                <div class="space10">&nbsp;</div>
+                                <a href="{{Route('getOrder')}}" class="beta-btn primary text-center">Dat Hang <i class="fa fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+        </div>
+            <br>
+        @endif
+    </div>
+{{--    Ket thuc gioi hang--}}
+
     <section id="aa-product">
         <div class="container">
             <div class="row">
@@ -81,6 +126,14 @@
                                                     </div>
                                                     <!-- product badge -->
                                                     <span class="aa-badge aa-hot" href="#">HOT!</span>
+
+{{--                                                    nut them vao gio hang--}}
+                                                            <div class="single-item-caption">
+                                                                <a href="{{Route('themgiohang',$product->id)}}" class="add-to-cart pull-left">
+                                                                    <i class="fa fa-shopping-cart">Them gio hang</i></a>
+                                                            </div>
+{{--                                                    ket thuc nut them vao gioi hang--}}
+
                                                 </li>
                                         @endforeach
                                         <!-- start single product item -->
