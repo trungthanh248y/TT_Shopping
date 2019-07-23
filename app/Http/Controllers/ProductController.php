@@ -160,5 +160,11 @@ class ProductController extends Controller
 
         return view('welcome', compact('products'));
     }
-}
 
+    public function getSearch(Request $request)
+    {
+        $products = Product::where('name','like','%'.$request->key.'%')->get();
+
+        return view('products.search',compact('products'));
+    }
+}

@@ -57,8 +57,14 @@ class CategoryController extends Controller
     {
         $category = Category::find($request->get('category_id'));
         $category->delete();
+
         return redirect()->route('indexCategory')->with('mes_del', 'Delete success');
     }
 
+    public function getSearch(Request $request)
+    {
+        $categories = Category::where('name','like','%'.$request->key.'%')->get();
 
+        return view('categories.search',compact('categories'));
+    }
 }

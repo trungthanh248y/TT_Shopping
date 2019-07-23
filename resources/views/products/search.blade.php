@@ -1,4 +1,5 @@
 @extends('layouts.app_admin')
+@section('title','Search product')
 @section('content')
     <body>
     <div class="container-fluid">
@@ -85,4 +86,3 @@
     </div>
     </body>
 @endsection
-

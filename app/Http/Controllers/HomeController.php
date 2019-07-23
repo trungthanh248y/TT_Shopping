@@ -7,7 +7,6 @@ use App\Event;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use App\Product;
 
 class HomeController extends Controller
@@ -47,5 +46,14 @@ class HomeController extends Controller
         $products = Product::paginate(12);
 
         return view('welcome', compact('products', 'events', 'categories'));
+    }
+
+    public function getSearch(Request $request)
+    {
+        $products = Product::where('name','like','%'.$request->key.'%')->get();
+        $events = Event::all();
+        $categories = Category::all();
+
+        return view('search',compact('products','events','categories'));
     }
 }

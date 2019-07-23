@@ -29,6 +29,8 @@ Route::middleware('checkmanage')->group(function () {
         Route::post('/edit/{id}', 'ProductController@update')->name('updateProduct');
 
         Route::post('/delete', 'ProductController@delete')->name('deleteProduct');
+
+        Route::get('/search','ProductController@getSearch')->name('searchProduct');
     });
 
     Route::prefix('event')->group(function () {
@@ -68,6 +70,8 @@ Route::middleware('checkmanage')->group(function () {
 
         Route::post('/delete', 'CategoryController@delete')->name('deleteCategory');
 
+        Route::get('/search','CategoryController@getSearch')->name('searchCategory');
+
     });
 
     Route::prefix('comment')->group(function () {
@@ -104,6 +108,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('checkadmi
 Route::get('/manage', 'HomeController@manage')->name('manage')->middleware('checkmanage');
 Route::get('/','HomeController@welcome')->name('welcome');
 
+Route::get('/search','HomeController@getSearch')->name('search');
 Route::get('add-to-cart/{id}', 'CreateShopingCartController@getAddtoCart')->name('themgiohang');
 Route::get('del-cart/{id}', 'CreateShopingCartController@getDelItemCart')->name('xoagiohang');
 
