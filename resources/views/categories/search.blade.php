@@ -1,4 +1,5 @@
 @extends('layouts.app_admin')
+@section('title','search category')
 @section('content')
     <body>
     <div class="container-fluid">

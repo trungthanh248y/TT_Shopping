@@ -61,7 +61,8 @@
                                 <div class="dropdown">
                                     <a class="btn dropdown-toggle" href="#" type="button" id="dropdownMenu1"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        <img src="http://template.brillianthotel.vn/content/dam/icons/vn_ic.png" alt="english flag">VN
+                                        <img src="http://template.brillianthotel.vn/content/dam/icons/vn_ic.png"
+                                             alt="english flag">VN
                                     </a>
                                 </div>
                             </div>
@@ -85,7 +86,8 @@
                                 @else
 
                                     <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                             {{ Auth::user()->name }} <span class="caret"></span>
                                         </a>
 
@@ -96,7 +98,8 @@
                                                 {{ __('Logout') }}
                                             </a>
 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                  style="display: none;">
                                                 {{ csrf_field() }}
                                             </form>
                                         </div>
@@ -122,7 +125,8 @@
                             <!-- Text based logo -->
                             <a href="{{asset('/')}}">
                                 <span class="fa fa-shopping-cart"></span>
-                                <p>{{ __('daily') }}<strong>{{ __('Shop') }}</strong> <span>{{ __('Your Shopping Partner') }}</span></p>
+                                <p>{{ __('daily') }}<strong>{{ __('Shop') }}</strong>
+                                    <span>{{ __('Your Shopping Partner') }}</span></p>
                             </a>
                             <!-- img based logo -->
                             <!-- <a href="index.html"><img src="img/logo.jpg" alt="logo img"></a> -->
@@ -167,8 +171,8 @@
                         <!-- / cart box -->
                         <!-- search box -->
                         <div class="aa-search-box">
-                            <form action="">
-                                <input type="text" name="" id="" placeholder="...">
+                            <form action="{{ Route('search') }}">
+                                <input type="text" name="key" id="s" placeholder="Nhap tu khoa...">
                                 <button type="submit"><span class="fa fa-search"></span></button>
                             </form>
                         </div>
@@ -184,7 +188,8 @@
                 <!-- Navbar -->
                 <div class="navbar navbar-default" role="navigation">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -198,8 +203,8 @@
                             <li><a href="#">Men <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     @foreach($categories as $category)
-                                    <li><a href="#">{{ $category->name }}</a></li>
-                                        @endforeach
+                                        <li><a href="#">{{ $category->name }}</a></li>
+                                    @endforeach
                                 </ul>
                             </li>
                         </ul>
