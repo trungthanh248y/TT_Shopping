@@ -58,7 +58,7 @@
                 <span>{{ __('Quản lý sản phẩm') }}</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{Route('indexCategory')}}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>{{ __('Quản lý danh mục') }}</span></a>
         </li>
@@ -71,6 +71,11 @@
             <a class="nav-link" href="{{Route('indexComment')}}">
                 <i class="fas fa-comment"></i>
                 <span>{{ __('Quản lý comments') }}</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{Route('indexEvent')}}">
+                <i class="fas fa-mobile"></i>
+                <span>{{ __('Quản lý event') }}</span></a>
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">

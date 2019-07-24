@@ -133,30 +133,36 @@
                             <a class="aa-cart-link" href="#">
                                 <span class="fa fa-shopping-basket"></span>
                                 <span class="aa-cart-title">{{ __('SHOPPING CART') }}</span>
-                                <span class="aa-cart-notify">2</span>
+                                <span class="aa-cart-notify">(@if(Session::has('cart')){{Session('cart')->totalQty}})
+                                    <i class="fa fa-chevron-down">@else Trong) @endif</span>
                             </a>
+                            @if(Session::has('cart'))
                             <div class="aa-cartbox-summary">
                                 <ul>
-                                    <li>
-                                        <a class="aa-cartbox-img" href="#"><img src="img/woman-small-1.jpg"
-                                                                                alt="img"></a>
-                                        <div class="aa-cartbox-info">
-                                            <h4><a href="#">Product Name</a></h4>
-                                            <p>1 x $250</p>
-                                        </div>
-                                        <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
-                                    </li>
+                                    @foreach($product_cart as $product)
+                                        <li>
+                                            <a class="aa-cartbox-img" href="#"><img style="width: 72px; height: 72px" src="{{asset('images/'.((count($product['item']->images)>0)?($product['item']->images[0]['name']):null))}}" alt=""></a>
+                                            <div class="aa-cartbox-info">
+                                                <h4><a href="#">{{$product['item']['name']}}</a></h4>
+                                                <p>{{$product['qty']}} X <span>@if($product['item']->event == null)
+                                                            {{number_format($product['item']['unit_price'])}}@else{{number_format($product['item']->event['promotion_price'])}}@endif
+                                            (<span>{{$product['item']['id_event']}}</span>)</span></p>
+                                            </div>
+                                            <a class="aa-remove-product" href="{{Route('xoagiohang',$product['item']['id'])}}"><span class="fa fa-times"></span></a>
+                                        </li>
+                                    @endforeach
                                     <li>
                       <span class="aa-cartbox-total-title">
                         Total
                       </span>
                                         <span class="aa-cartbox-total-price">
-                        $500
+                        {{number_format(Session('cart')->totalPrice)}}
                       </span>
                                     </li>
                                 </ul>
-                                <a class="aa-cartbox-checkout aa-primary-btn" href="checkout.html">{{ __('Checkout') }}</a>
+                                <a class="aa-cartbox-checkout aa-primary-btn" href="{{Route('getOrder')}}">{{ __('Checkout') }}</a>
                             </div>
+                            @endif
                         </div>
                         <!-- / cart box -->
                         <!-- search box -->
