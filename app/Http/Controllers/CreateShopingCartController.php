@@ -58,19 +58,16 @@ class CreateShopingCartController extends Controller
             $bill->created_at = date('Y-m-d H:i:s');
             $bill->updated_at = date('Y-m-d H:i:s');
             if ($bill->save()) {
+                $mess='Đặt hàng thành công';
                 foreach ($cart->items as $k => $v) {
                     $bill_detail = new Bill_Detail();
                     $bill_detail->id_bill = $bill->id;
                     $bill_detail->id_product = $k;
-                    //Nếu muốn lưu đơn giá thay vì dd($cart) và tìm thì lên lấy ($v['price']/$v['qty']) nó sẽ đỡ giắc rối hơn
                     $bill_detail->quantity = $v['qty'];
-                    $mess='Đặt hàng thành công';
-                    if($bill_detail->save()){
-                        Session::forget('cart');
-
-                        return redirect()->back()->with('mess',$mess);
-                    }
+                    $bill_detail->save();
                 }
+                Session::forget('cart');
+                return redirect()->route('welcome')->with('mess',$mess);
             }
         }
     }

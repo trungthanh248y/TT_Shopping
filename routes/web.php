@@ -108,5 +108,5 @@ Route::get('add-to-cart/{id}', 'CreateShopingCartController@getAddtoCart')->name
 Route::get('del-cart/{id}', 'CreateShopingCartController@getDelItemCart')->name('xoagiohang');
 
 Route::get('getOrder','CreateShopingCartController@getCheckout')->name('getOrder');
-Route::get('postOrder','CreateShopingCartController@postCheckout')->name('postOrder');
+Route::post('postOrder','CreateShopingCartController@postCheckout')->name('postOrder');
 
