@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Mail\SendEmail;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Bill;
 Use App\Bill_Detail;
@@ -66,6 +68,7 @@ class CreateShopingCartController extends Controller
                     $bill_detail->quantity = $v['qty'];
                     $bill_detail->save();
                 }
+                Mail::to(Auth::user()->email)->send(new SendEmail($bill));
                 Session::forget('cart');
                 return redirect()->route('welcome')->with('mess',$mess);
             }
