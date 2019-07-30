@@ -60,7 +60,7 @@ class CreateShopingCartController extends Controller
             $bill->created_at = date('Y-m-d H:i:s');
             $bill->updated_at = date('Y-m-d H:i:s');
             if ($bill->save()) {
-                $mess='Đặt hàng thành công';
+                $mess = "{{ __('Đặt hàng thành công') }}";
                 foreach ($cart->items as $k => $v) {
                     $bill_detail = new Bill_Detail();
                     $bill_detail->id_bill = $bill->id;
@@ -70,6 +70,7 @@ class CreateShopingCartController extends Controller
                 }
                 Mail::to(Auth::user()->email)->send(new SendEmail($bill));
                 Session::forget('cart');
+
                 return redirect()->route('welcome')->with('mess',$mess);
             }
         }

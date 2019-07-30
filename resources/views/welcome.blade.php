@@ -109,7 +109,7 @@
                                                         <a class="aa-product-img" href="#"><img style="width: 250px;height: 250px" src="{{asset('images/'.((count($product->images)>0)?($product->images[0]['name']):null))}}"
                                                                                                 alt="polo shirt img"></a>
                                                         <a class="aa-add-card-btn" href="{{Route('themgiohang',$product->id)}}"><span
-                                                                    class="fa fa-shopping-cart"></span>Add To Cart</a>
+                                                                    class="fa fa-shopping-cart"></span>{{ __('Add To Cart') }}</a>
                                                         <figcaption>
                                                             <h4 class="aa-product-title"><a href="#">{{$product->name}}</a></h4>
                                                             <span class="aa-product-price">{{number_format($product->unit_price)}}$</span>
@@ -124,7 +124,7 @@
                                                                     class="fa fa-search"></span></a>
                                                     </div>
                                                     <!-- product badge -->
-                                                    <span class="aa-badge aa-hot" href="#">HOT!</span>
+                                                    <span class="aa-badge aa-hot" href="#">{{ __('HOT') }}!</span>
 
 {{--                                                    nut them vao gio hang--}}
 

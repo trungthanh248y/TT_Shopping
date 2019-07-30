@@ -11,6 +11,7 @@ class ShopingCartController extends Controller
     {
         $arr = [];
         $arr[] = $id;
+
         return view('ShopingCart.home', compact('arr'));
     }
 
