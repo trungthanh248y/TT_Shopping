@@ -70,6 +70,7 @@ class CreateShopingCartController extends Controller
                 }
                 Mail::to(Auth::user()->email)->send(new SendEmail($bill));
                 Session::forget('cart');
+
                 return redirect()->route('welcome')->with('mess',$mess);
             }
         }

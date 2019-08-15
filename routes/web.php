@@ -114,4 +114,3 @@ Route::get('del-cart/{id}', 'CreateShopingCartController@getDelItemCart')->name(
 
 Route::get('getOrder','CreateShopingCartController@getCheckout')->name('getOrder');
 Route::post('postOrder','CreateShopingCartController@postCheckout')->name('postOrder');
-

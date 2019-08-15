@@ -136,8 +136,8 @@ class ProductController extends Controller
     public function delete(Request $request)
     {
         $product = Product::find($request->get('product_id'));
-        if($product->delete()){
-            $images = Image::where('id_product',$request->get('product_id'))->delete();
+        if ($product->delete()) {
+            $images = Image::where('id_product', $request->get('product_id'))->delete();
         }
 
         return redirect()->route('indexProduct')->with('mes_del', "{{ __('Delete success') }}");
@@ -163,8 +163,8 @@ class ProductController extends Controller
 
     public function getSearch(Request $request)
     {
-        $products = Product::where('name','like','%'.$request->key.'%')->get();
+        $products = Product::where('name', 'like', '%' . $request->key . '%')->get();
 
-        return view('products.search',compact('products'));
+        return view('products.search', compact('products'));
     }
 }

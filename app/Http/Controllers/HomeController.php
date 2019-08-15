@@ -50,10 +50,10 @@ class HomeController extends Controller
 
     public function getSearch(Request $request)
     {
-        $products = Product::where('name','like','%'.$request->key.'%')->get();
+        $products = Product::where('name', 'like', '%' . $request->key . '%')->get();
         $events = Event::all();
         $categories = Category::all();
 
-        return view('search',compact('products','events','categories'));
+        return view('search', compact('products', 'events', 'categories'));
     }
 }

@@ -21,5 +21,4 @@
             <input type="submit" value="{{ __('Edit') }}" class="btn btn-success">
         </form>
     </div>
-
 @endsection
