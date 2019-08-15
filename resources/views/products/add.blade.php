@@ -24,7 +24,7 @@
             <input type="text" name="unit_price" class="form-control">
 
             <label>{{ __('Category') }}</label>
-            <select name="category_id">
+            <select name="id_category">
                 @foreach($categories as $category)
                     <option value="{!! $category->id !!}">{!! $category->name !!}</option>
                 @endforeach
