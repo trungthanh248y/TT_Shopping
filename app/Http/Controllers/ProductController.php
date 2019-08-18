@@ -49,10 +49,10 @@ class ProductController extends Controller
             $arr['unit_price'] = $request->get('unit_price');
             $arr['id_category'] = $request->get('id_category');
             $arr['id_event'] = $request->get('id_event');
-            $id = $this->productRepository->create($arr);
+            $id = $this->productRepository->create($arr)->id;
             if ($id) {
                 foreach ($image as $k => $v) {
-                    $this->productRepository->create($v, $id);
+                    $this->productRepository->storeProductImage($v, $id);
                 }
                 $mess = "{{ __('Success add new') }}";
             }
@@ -85,9 +85,8 @@ class ProductController extends Controller
             $arr['id_category'] = $request->get('id_category');
             $arr['id_event'] = $request->get('id_event');
             $product_id = $this->productRepository->update($id, $arr)->id;
-            dd($product_id);
             if ($product_id) {
-                $this->productRepository->delete($id);
+                $this->productRepository->deleteProductImage($id);
                 foreach ($image as $k => $v) {
                     $this->productRepository->storeProductImage($v, $product_id);
                     $mess = "{{ __('Success edit') }}";
@@ -101,8 +100,7 @@ class ProductController extends Controller
     public function delete(Request $request)
     {
         $product_id = $request->get('product_id');
-        if($this->productRepository->deleteProduct($product_id))
-        {
+        if ($this->productRepository->delete($product_id)) {
             $this->productRepository->deleteProductImage($product_id);
         }
 

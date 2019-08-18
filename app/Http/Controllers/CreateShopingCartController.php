@@ -16,22 +16,27 @@ use Illuminate\Support\Facades\DB;
 
 class CreateShopingCartController extends Controller
 {
-    //
     public function getAddtoCart(Request $request, $id)
     {
-        DB::transaction(function (Request $request, $id){
-            try{
-                $product = Product::find($id);
-                $oldCart = Session('cart') ? Session::get('cart') : null;
-                $cart = new Cart($oldCart);
-                $cart->add($product, $id);
-                $request->session()->put('cart', $cart);
-                DB::commit();
-            }
-            catch (\Exception $e){
-                DB::rollback();
-            }
-        });
+        $product = Product::find($id);
+        $oldCart = Session('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $id);
+        $request->session()->put('cart', $cart);
+
+//        DB::transaction(function (Request $request, $id){
+//            try{
+//                $product = Product::find($id);
+//                $oldCart = Session('cart') ? Session::get('cart') : null;
+//                $cart = new Cart($oldCart);
+//                $cart->add($product, $id);
+//                $request->session()->put('cart', $cart);
+//                DB::commit();
+//            }
+//            catch (\Exception $e){
+//                DB::rollback();
+//            }
+//        });
         return redirect()->back();
     }
 

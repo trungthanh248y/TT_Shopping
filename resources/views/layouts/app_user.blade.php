@@ -138,7 +138,7 @@
                                 <span class="fa fa-shopping-basket"></span>
                                 <span class="aa-cart-title">{{ __('SHOPPING CART') }}</span>
                                 <span class="aa-cart-notify">(@if(Session::has('cart')){{Session('cart')->totalQty}})
-                                    <i class="fa fa-chevron-down">@else Trong) @endif</span>
+                                    @else {{ __('Trong)') }} @endif</span>
                             </a>
                             @if(Session::has('cart'))
                             <div class="aa-cartbox-summary">

@@ -8,6 +8,10 @@ app/storage/
 .idea/
 
 # Laravel 5 & Lumen specific
+<<<<<<< HEAD
+=======
+public
+>>>>>>> baaabad6912d0dba3508879787b0612933371ff5
 public/bower_components
 public/storage
 public/css
@@ -15,7 +19,6 @@ public/js
 public/images
 public/fontawesome-free-5.9.0-web
 public/hot
-public/images
 storage/*.key
 .env.*.php
 .env.php
