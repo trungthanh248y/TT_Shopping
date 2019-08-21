@@ -29,6 +29,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">{{ __('Name') }}</th>
+                            <th scope="col">{{ __('Image') }}</th>
                             <th scope="col">{{ __('Promotion price') }}</th>
                             <th scope="col">{{ __('End promotion')}}</th>
                             <th scope="col">{{ __('EDIT') }}</th>
@@ -40,6 +41,7 @@
                             <tr>
                                 <th scope="row">{!! $event->id !!}</th>
                                 <td>{!! $event->name !!}</td>
+                                <td><center><img src="{{$event->image}}" width="150" height="80" alt=""></center></td>
                                 <td>{!! $event->promotion_price !!}</td>
                                 <td>{!! $event->end_promotion !!}</td>
                                 <td>
