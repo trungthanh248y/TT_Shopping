@@ -8,7 +8,6 @@ app/storage/
 .idea/
 
 # Laravel 5 & Lumen specific
-public
 public/storage
 public/css
 public/js
