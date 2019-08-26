@@ -105,13 +105,12 @@
                         <div class="aa-header-top-right">
                             <ul class="aa-head-top-nav-right">
                                 @guest
-                                    <li><a href="#">{{ __('My Account') }}</a></li>
+                                    <li><a href="{{Route('register')}}">{{ __('Register') }}</a></li>
                                     <li><a href="{{Route('login')}}">{{ __('Login') }}</a></li>
-
                                 @else
-
                                     <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    <a href="{{Route('home')}}">{{ __('Trang quản lý') }}</a>
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                             {{ Auth::user()->name }} <span class="caret"></span>
                                         </a>
@@ -191,8 +190,8 @@
                         <!-- / cart box -->
                         <!-- search box -->
                         <div class="aa-search-box">
-                            <form action="">
-                                <input type="text" name="" id="" placeholder="...">
+                            <form action="{{ Route('search') }}">
+                                <input type="text" name="key" id="s" placeholder="{{ __('Tìm kiếm theo tên sản phẩm') }}">
                                 <button type="submit"><span class="fa fa-search"></span></button>
                             </form>
                         </div>

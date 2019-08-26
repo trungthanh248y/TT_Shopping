@@ -15,6 +15,11 @@ class CreateImageEventsTable extends Migration
     {
         Schema::create('image_events', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->nullable();
+            $table->string('image')->nullable();
+            $table->integer('promotion_price')->nullable();
+            $table->date('end_promotion')->nullable();
+            $table->integer('id_user')->default(1);
             $table->timestamps();
         });
     }
