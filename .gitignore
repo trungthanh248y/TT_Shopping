@@ -15,12 +15,14 @@ public/js
 public/image
 public/fontawesome-free-5.9.0-web
 public/images
+public/bower_components
 storage/*.key
 .env.*.php
 .env.php
 .env
 Homestead.yaml
 Homestead.json
+e.log
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
