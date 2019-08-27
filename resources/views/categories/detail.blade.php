@@ -16,6 +16,7 @@
                                          alt="Male Female slide img"/>
                                 </div>
                                 <div class="seq-title">
+                                    <span data-seq>{{ __('Sale up to') }}: {{ $event->promotion_price }}%</span>
                                     <h2 data-seq>{{ $event->name }}</h2>
                                     <p data-seq>{{ __('Ngày kết thúc:') }} {{ $event->end_promotion }}</p>
                                     <a data-seq href="{{Route('eventdetail',$event->id)}}"
@@ -65,7 +66,7 @@
                                                             {{ __('no image') }}
                                                         @else
                                                             <?php $image=($product['images']);?>
-                                                            <a class="aa-product-img" href="#"><img width="295"
+                                                            <a class="aa-product-img" href="#"><img width="250"
                                                                                                     src="{{ asset('images/'. $product['images'][0]['name'] )}}"
                                                                                                     alt="polo shirt img"></a>
                                                             <a class="aa-add-card-btn" href="#"><span
