@@ -200,7 +200,7 @@
                         <!-- search box -->
                         <div class="aa-search-box">
                             <form action="{{ Route('search') }}">
-                                <input type="text" name="key" id="s" placeholder="Nhap tu khoa...">
+                                <input type="text" name="key" id="s" placeholder="{{ __('Tìm kiếm theo tên sản phẩm') }}">
                                 <button type="submit"><span class="fa fa-search"></span></button>
                             </form>
                         </div>
