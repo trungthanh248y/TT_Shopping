@@ -16,6 +16,7 @@
                                          alt="Male Female slide img"/>
                                 </div>
                                 <div class="seq-title">
+                                    <span data-seq>{{ __('Sale up to') }}: {{ $event->promotion_price }}%</span>
                                     <h2 data-seq>{{ $event->name }}</h2>
                                     <p data-seq>{{ __('Ngày kết thúc:') }} {{ $event->end_promotion }}</p>
                                     <a data-seq href="{{Route('eventdetail',$event->id)}}"
@@ -96,7 +97,7 @@
                                             @foreach($products as $product)
                                                 <li>
                                                     <figure>
-                                                        <a class="aa-product-img" href="#"><img style="width: 250px;height: 250px" src="{{asset('images/'.((count($product['images'])>0)?($product['images'][0]['name']):null))}}"
+                                                        <a class="aa-product-img" href="#"><img style="width: 250px" src="{{asset('images/'.((count($product['images'])>0)?($product['images'][0]['name']):null))}}"
                                                                                                 alt="polo shirt img"></a>
                                                         <a class="aa-add-card-btn" href="{{Route('themgiohang',$product['id'])}}"><span
                                                                     class="fa fa-shopping-cart"></span>{{ __('Add To Cart') }}</a>

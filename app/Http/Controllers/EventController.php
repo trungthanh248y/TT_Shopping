@@ -71,6 +71,6 @@ class EventController extends Controller
         $category1 = Category::all()->where('id', '=', 1);
         $parent1 = Category::all()->where('id_parent', '=', 1);
         $detailcategory = Category::find($id);
-        return view('events.detail', compact('event', 'products', 'detailcategory', 'events', 'products', 'events', 'categories', 'category1', 'category2', 'category3', 'category4', 'category5', 'parent1', 'parent2', 'parent3', 'parent4', 'parent5'));
+        return view('events.detail', compact('event', 'products', 'detailcategory', 'events', 'products', 'events', 'category1', 'parent1'));
     }
 }
