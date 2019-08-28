@@ -1,6 +1,4 @@
-<script src = "./path/to/dropzone.js" ></script >
-
-@extends('master')
+@extends('layouts.app')
 @section('title','create new product')
 @section('content')
     <div class="container">
@@ -14,7 +12,7 @@
             @endforeach
         @endif
         <form action="{!! Route('storeProduct') !!}" method="post" enctype="multipart/form-data" class = "dropzone">
-{{--             enctype="multipart/form-data"--}}
+            {{--             enctype="multipart/form-data"--}}
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <label>{{ __('Name') }}</label>
             <input type="text" name="name" class="form-control">
@@ -26,7 +24,7 @@
             <input type="text" name="unit_price" class="form-control">
 
             <label>{{ __('Category') }}</label>
-            <select name="category_id">
+            <select name="id_category">
                 @foreach($categories as $category)
                     <option value="{!! $category->id !!}">{!! $category->name !!}</option>
                 @endforeach
@@ -48,3 +46,4 @@
         </form>
     </div>
 @endsection
+

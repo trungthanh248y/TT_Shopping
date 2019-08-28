@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ __('Daily Shop') }} | {{ __('Home') }}</title>
+    <title>{{ __('Daily Shop | Home') }}</title>
 
     <!-- Font awesome -->
     <!-- Font awesome -->
@@ -105,15 +105,12 @@
                         <div class="aa-header-top-right">
                             <ul class="aa-head-top-nav-right">
                                 @guest
-                                    <li><a href="{{Route('login')}}">{{ __('Login') }}</a></li>
                                     <li><a href="{{Route('register')}}">{{ __('Register') }}</a></li>
+                                    <li><a href="{{Route('login')}}">{{ __('Login') }}</a></li>
                                 @else
-
                                     <li class="nav-item dropdown">
-                                        <a href="{{Route('home')}}">{{ __('Trang quản lý') }}</a>
-
-
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    <a href="{{Route('home')}}">{{ __('Trang quản lý') }}</a>
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                             {{ Auth::user()->name }} <span class="caret"></span>
                                         </a>
@@ -164,42 +161,37 @@
                             <a class="aa-cart-link" href="#">
                                 <span class="fa fa-shopping-basket"></span>
                                 <span class="aa-cart-title">{{ __('SHOPPING CART') }}</span>
-                                <span class="aa-cart-notify">(@if(Session::has('cart')){{Session('cart')->totalQty}})
-                                    <i class="fa fa-chevron-down">@else Trong) @endif</span>
+                                <span class="aa-cart-notify">2</span>
                             </a>
-                            @if(Session::has('cart'))
                             <div class="aa-cartbox-summary">
                                 <ul>
-                                    @foreach($product_cart as $product)
-                                        <li>
-                                            <a class="aa-cartbox-img" href="#"><img style="width: 72px; height: 72px" src="{{asset('images/'.((count($product['item']->images)>0)?($product['item']->images[0]['name']):null))}}" alt=""></a>
-                                            <div class="aa-cartbox-info">
-                                                <h4><a href="#">{{$product['item']['name']}}</a></h4>
-                                                <p>{{$product['qty']}} X <span>@if($product['item']->event == null)
-                                                            {{number_format($product['item']['unit_price'])}}@else{{number_format($product['item']->event['promotion_price'])}}@endif
-                                            (<span>{{$product['item']['id_event']}}</span>)</span></p>
-                                            </div>
-                                            <a class="aa-remove-product" href="{{Route('xoagiohang',$product['item']['id'])}}"><span class="fa fa-times"></span></a>
-                                        </li>
-                                    @endforeach
+                                    <li>
+                                        <a class="aa-cartbox-img" href="#"><img src="img/woman-small-1.jpg"
+                                                                                alt="img"></a>
+                                        <div class="aa-cartbox-info">
+                                            <h4><a href="#">Product Name</a></h4>
+                                            <p>1 x $250</p>
+                                        </div>
+                                        <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
+                                    </li>
                                     <li>
                       <span class="aa-cartbox-total-title">
                         Total
                       </span>
                                         <span class="aa-cartbox-total-price">
-                        {{number_format(Session('cart')->totalPrice)}}
+                        $500
                       </span>
                                     </li>
                                 </ul>
-                                <a class="aa-cartbox-checkout aa-primary-btn" href="{{Route('getOrder')}}">{{ __('Checkout') }}</a>
+                                <a class="aa-cartbox-checkout aa-primary-btn"
+                                   href="checkout.html">{{ __('Checkout') }}</a>
                             </div>
-                            @endif
                         </div>
                         <!-- / cart box -->
                         <!-- search box -->
                         <div class="aa-search-box">
                             <form action="{{ Route('search') }}">
-                                <input type="text" name="key" id="s" placeholder="Nhap tu khoa...">
+                                <input type="text" name="key" id="s" placeholder="{{ __('Tìm kiếm theo tên sản phẩm') }}">
                                 <button type="submit"><span class="fa fa-search"></span></button>
                             </form>
                         </div>
@@ -209,38 +201,6 @@
             </div>
         </div>
     </div>
-    <section id="menu">
-        <div class="container">
-            <div class="menu-area">
-                <!-- Navbar -->
-                <div class="navbar navbar-default" role="navigation">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <!-- Left nav -->
-                        <ul class="nav navbar-nav">
-                            <li><a href="{{Route('welcome')}}">Home</a></li>
-                            <li><a href="#">Men <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    @foreach($categories as $category)
-                                        <li><a href="#">{{ $category->name }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
-    </section>
-
 @yield('content')
 <!-- / header bottom  -->
 </header>
@@ -264,6 +224,9 @@
 <script type="text/javascript" src="{{ asset('js/nouislider.js') }}"></script>
 <!-- Custom js -->
 <script src="{{ asset('js/custom.js  ') }}"></script>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 </body>
 <!-- / header section -->
 <!-- menu -->
+

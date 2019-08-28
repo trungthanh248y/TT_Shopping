@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.app')
 @section('title','edit product')
 @section('content')
     <div class="container">
@@ -58,3 +58,4 @@
         </p>
     </div>
 @endsection
+

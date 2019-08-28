@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +37,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="{{Route('home')}}">
+            <a class="nav-link" href="{{Route('welcome')}}">
                 <i class="fas fa-home"></i>
                 <span>{{ __('Home') }}</span></a>
         </li>
