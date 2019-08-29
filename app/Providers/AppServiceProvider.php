@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Cart;
+use App\Contracts\EventRepositoryInterface;
 use App\Contracts\ProductRepositoryInterface;
+use App\Repositories\Eloquents\EventRepository;
 use App\Repositories\Eloquents\ProductRepositoryIn;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -38,5 +40,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(ProductRepositoryInterface::class,ProductRepositoryIn::class);
+        $this->app->singleton(EventRepositoryInterface::class,EventRepository::class);
     }
 }
