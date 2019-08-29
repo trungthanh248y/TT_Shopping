@@ -229,8 +229,8 @@
                             <li><a href="{{Route('welcome')}}">Home</a></li>
                             <li><a href="#">Men <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    @foreach($categories as $category)
-                                        <li><a href="#">{{ $category->name }}</a></li>
+                                    @foreach($parent1 as $y1)
+                                        <li><a href="{{ Route('categorydetail', $y1->id) }}">{{ $y1->name }}</a>
                                     @endforeach
                                 </ul>
                             </li>

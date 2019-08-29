@@ -12,6 +12,7 @@ return [
     | any other location as required by the application or its packages.
     |
     */
+    'emailAdmin'=>'trungthanh248y@gmail.com',
 
     'name' => env('APP_NAME', 'Laravel'),
 
