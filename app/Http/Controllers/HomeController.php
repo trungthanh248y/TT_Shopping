@@ -30,6 +30,7 @@ class HomeController extends Controller
         $categories = Category::all();
         $users = User::all();
         $products = Product::all();
+
         return view('home', compact('products', 'users', 'categories'));
     }
     public function manage()
