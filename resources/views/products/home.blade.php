@@ -55,7 +55,7 @@
                                 <td>{!! $product['category']['name'] !!}</td>
                                 <td>
                                     @if(count($product['images']) == 0)
-                                        no image
+                                        {{ __('no image') }}
                                     @else
                                         <?php $image=($product['images']);?>
                                         @foreach ($image as $images)

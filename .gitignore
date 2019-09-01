@@ -8,23 +8,21 @@ app/storage/
 .idea/
 
 # Laravel 5 & Lumen specific
-<<<<<<< HEAD
-=======
-public
->>>>>>> baaabad6912d0dba3508879787b0612933371ff5
-public/bower_components
-public/storage
+public/fonts
+public/scss
 public/css
 public/js
-public/images
+public/image
 public/fontawesome-free-5.9.0-web
-public/hot
+public/images
+public/bower_components
 storage/*.key
 .env.*.php
 .env.php
 .env
 Homestead.yaml
 Homestead.json
+e.log
 
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/

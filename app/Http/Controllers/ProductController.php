@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Contracts\ProductRepositoryInterface;
 use App\Event;
+use App\ImageEvent;
 use App\Image;
-use App\Repositories\Eloquents\Product\ProductRepositoryIn;
+use DemeterChain\C;
 use Illuminate\Http\Request;
+use App\Repositories\Eloquents\ProductRepositoryIn;
 use App\Product;
 use App\Category;
 use Illuminate\Support\Facades\DB;
@@ -105,5 +107,24 @@ class ProductController extends Controller
         }
 
         return redirect()->route('indexProduct')->with('mes_del', "{{ __('Delete success') }}");
+    }
+
+    public function DetailProduct($id)
+    {
+        $product_image = $this->productRepository->DisplayProductImage($id);
+        $products = $this->productRepository->find($id);
+        $categories = $this->productRepository->getAll();
+        $products_category = $this->productRepository->DisplayProductEvenCategory($id);
+        $products_sale = $this->productRepository->ShowPromotion_price($id);
+        $comments = $this->productRepository->ShowProductComments($id);
+        $categories_detail = $this->productRepository->ShowProductCategory($id);
+        $events = $this->productRepository->ShowEvent($id);
+        return view('products.detail', compact('categories', 'products', 'products_sale', 'events', 'categories_detail', 'product_image', 'products_category', 'comments'));
+    }
+
+    public function getSearch(Request $request)
+    {
+        $products = $this->productRepository->getSearch($request);
+        return view('products.search', compact('products'));
     }
 }
