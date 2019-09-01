@@ -27,4 +27,6 @@ interface ProductRepositoryInterface extends RepositoryInterface
     public function ShowEvent($id);
 
     public function getSearch($request);
+
 }
+
