@@ -106,4 +106,15 @@ class ProductRepositoryIn extends ElequentRepository implements ProductRepositor
     {
         return Product::where('name', 'like', '%' . $request->key . '%')->get();
     }
+    public function categoryMenu()
+    {
+        $category1 = Category::all()->where('id', '=', 1);
+        return $category1;
+    }
+    public function parentMenu()
+    {
+        $parent1 = Category::all()->where('id_parent', '=', 1);
+        return $parent1;
+
+    }
 }

@@ -94,7 +94,8 @@ class ProductController extends Controller
                     $mess = "{{ __('Success edit') }}";
                 }
 
-                return view('products.edit', compact('categories', 'product', 'events'))->with('mess', $mess);
+                return view('products.edit', compact('categories'
+                    , 'product', 'events'))->with('mess', $mess);
             }
         }
     }
@@ -119,7 +120,11 @@ class ProductController extends Controller
         $comments = $this->productRepository->ShowProductComments($id);
         $categories_detail = $this->productRepository->ShowProductCategory($id);
         $events = $this->productRepository->ShowEvent($id);
-        return view('products.detail', compact('categories', 'products', 'products_sale', 'events', 'categories_detail', 'product_image', 'products_category', 'comments'));
+        $category1 = $this->productRepository->categoryMenu();
+        $parent1 = $this->productRepository->parentMenu();
+        return view('products.detail', compact('categories', 'products'
+            , 'category1', 'parent1', 'products_sale', 'events'
+            , 'categories_detail', 'product_image', 'products_category', 'comments'));
     }
 
     public function getSearch(Request $request)

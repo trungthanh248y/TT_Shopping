@@ -1,4 +1,4 @@
-@extends('layouts.app_detail_product')
+@extends('layouts.app_user')
 @section('content')
     <section id="aa-product-details">
         <div class="container">
@@ -45,7 +45,7 @@
                                             <span class="aa-product-view-price text-danger ">{{ __('Giá') }}: <del>{{$products->unit_price}}$</del></span>
                                         </div>
                                         <div class="aa-price-block">
-                                            <span class="aa-product-view-price text-danger ">{{ __('Giá khuyến mại:') }}: {{$products->event['promotion_price']}}$ </span>
+                                            <span class="aa-product-view-price text-danger ">{{ __('Giá khuyến mại') }}: {{($products->unit_price - $products->event['promotion_price']*$products->unit_price/100)}}$ </span>
                                         </div>
                                         <br>
                                         <div class="aa-prod-quantity">

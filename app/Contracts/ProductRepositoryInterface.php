@@ -6,6 +6,8 @@ use App\Contracts\RepositoryInterface;
 
 interface ProductRepositoryInterface extends RepositoryInterface
 {
+    public function categoryMenu();
+    public function parentMenu();
     public function allEvent();
 
     public function allCategory();
