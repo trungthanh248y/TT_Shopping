@@ -164,8 +164,8 @@
                             <a class="aa-cart-link" href="#">
                                 <span class="fa fa-shopping-basket"></span>
                                 <span class="aa-cart-title">{{ __('SHOPPING CART') }}</span>
-                                <span class="aa-cart-notify">(@if(Session::has('cart')){{Session('cart')->totalQty}})
-                                    @else {{ __('Trống') }} @endif </span>
+                                <span class="aa-cart-notify">@if(Session::has('cart')){{Session('cart')->totalQty}}
+                                    @else {{ __('0') }} @endif </span>
                             </a>
                             @if(Session::has('cart'))
                             <div class="aa-cartbox-summary">

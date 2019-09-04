@@ -35,12 +35,48 @@
         </div>
     </section>
 
-    <!-- Start slider -->
+    {{--    gioi hang--}}
+    {{--    <div class="beta-comp">--}}
+    {{--        <div class="cart">--}}
+    {{--            <div class="beta-select"><i class="fa fa-shopping-cart"></i>--}}
+    {{--                    Gio Hang(@if(Session::has('cart')){{Session('cart')->totalQty}})<i class="fa fa-chevron-down">--}}
+    {{--                    @else Trong) @endif--}}
+    {{--                    </i></div>--}}
+    {{--                    @if(Session::has('cart'))--}}
+    {{--                    @foreach($product_cart as $product)--}}
+    {{--                        <div class="cart-item">--}}
+    {{--                            --}}{{--                                                    nut xoa khoi gio hang--}}
 
-    <!-- / slider -->
-    <!-- Start Promo section -->
-    <!-- / Promo section -->
-    <!-- Products section -->
+    {{--                            <a href="{{Route('xoagiohang',$product['item']['id'])}}" class="cart-item-delete">--}}
+    {{--                                <i class="fa fa-times">Xoa gio hang</i></a>--}}
+
+    {{--                            --}}{{--                                                    ket thuc nut xoa gio hang--}}
+    {{--                            <div class="media">--}}
+    {{--                                <a href="#" class="pull-left"><img style="width: 72px; height: 72px" src="{{asset('images/'.((count($product['item']->images)>0)?($product['item']->images[0]['name']):null))}}" alt=""></a>--}}
+    {{--                                <div class="media-body">--}}
+    {{--                                    <span class="cart-item-title">{{$product['item']['name']}}</span>--}}
+    {{--                                    <span class="cart-item-amount">{{$product['qty']}}*<span>@if($product['item']->event == null)--}}
+    {{--                                                {{number_format($product['item']['unit_price'])}}@else{{number_format($product['item']->event['promotion_price'])}}@endif--}}
+    {{--                                            (<span>{{$product['item']['id_event']}}</span>)</span></span>--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    @endforeach--}}
+    {{--                        <div class="cart-caption">--}}
+    {{--                            <br>--}}
+    {{--                            <div class="cart-total text-right">Tong Tien: <span class="cart-total-value">{{number_format(Session('cart')->totalPrice)}}</span></div>--}}
+    {{--                            <div class="clearfix"></div>--}}
+    {{--                            <div class="center">--}}
+    {{--                                <div class="space10">&nbsp;</div>--}}
+    {{--                                <a href="{{Route('getOrder')}}" class="beta-btn primary text-center">Dat Hang <i class="fa fa-chevron-right"></i></a>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--        </div>--}}
+    {{--            <br>--}}
+    {{--        @endif--}}
+    {{--    </div>--}}
+    {{--    Ket thuc gioi hang--}}
+
     <section id="aa-product">
         <div class="container">
             <div class="row">
@@ -50,7 +86,6 @@
                             <div class="aa-product-inner">
                                 <!-- start prduct navigation -->
                                 <ul class="nav nav-tabs aa-products-tab">
-
                                     <!-- category -->
                                 </ul>
                                 <!-- Tab panes -->
@@ -62,21 +97,16 @@
                                             @foreach($products as $product)
                                                 <li>
                                                     <figure>
-                                                        @if(count($product['images']) == 0)
-                                                            {{ __('no image') }}
-                                                        @else
-                                                            <?php $image=($product['images']);?>
-                                                            <a class="aa-product-img" href="#"><img width="250"
-                                                                                                    src="{{ asset('images/'. $product['images'][0]['name'] )}}"
-                                                                                                    alt="polo shirt img"></a>
-                                                            <a class="aa-add-card-btn" href="#"><span
-                                                                        class="fa fa-shopping-cart"></span>{{ __('Add To Cart') }}</a>
-                                                        @endif
+                                                        <a class="aa-product-img" href="#"><img style="width: 250px" src="{{asset('images/'.((count($product['images'])>0)?($product['images'][0]['name']):null))}}"
+                                                                                                alt="polo shirt img"></a>
+                                                        <a class="aa-add-card-btn" href="{{Route('themgiohang',$product['id'])}}"><span
+                                                                    class="fa fa-shopping-cart"></span>{{ __('Add To Cart') }}</a>
                                                         <figcaption>
                                                             <h4 class="aa-product-title"><a
                                                                         href="#">{{$product['name']}}</a></h4>
                                                             <span class="text-dark"><del>{{$product['unit_price']}}$</del></span>
-                                                            <span class="aa-product-price">{{$product['event']['promotion_price']}}$</span>
+                                                            <span class="aa-product-price">{{$product['unit_price'] - $product['event']['promotion_price']*$product['unit_price']/100}}$</span>
+
                                                         </figcaption>
                                                     </figure>
                                                     <div class="aa-product-hvr-content">
@@ -87,6 +117,16 @@
                                                     </div>
                                                     <!-- product badge -->
                                                     <span class="aa-badge aa-hot" href="#">{{ __('HOT') }}!</span>
+
+                                                    {{--                                                    nut them vao gio hang--}}
+
+                                                    {{--                                                            <div class="single-item-caption">--}}
+                                                    {{--                                                                <a href="{{Route('themgiohang',$product->id)}}" class="add-to-cart pull-left">--}}
+                                                    {{--                                                                    <i class="fa fa-shopping-cart">Them gio hang</i></a>--}}
+                                                    {{--                                                            </div>--}}
+
+                                                    {{--                                                    ket thuc nut them vao gioi hang--}}
+
                                                 </li>
                                         @endforeach
                                         <!-- start single product item -->

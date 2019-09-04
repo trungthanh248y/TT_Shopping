@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Category;
 use App\ImageEvent;
 use App\Event;
@@ -10,6 +12,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Product;
+
 class HomeController extends Controller
 {
     /**
@@ -20,6 +23,7 @@ class HomeController extends Controller
     public function __construct()
     {
     }
+
     /**
      * Show the application dashboard.
      *
@@ -33,10 +37,12 @@ class HomeController extends Controller
 
         return view('home', compact('products', 'users', 'categories'));
     }
+
     public function manage()
     {
         return view('manage');
     }
+
     public function welcome()
     {
         $events = ImageEvent::all();
@@ -55,6 +61,7 @@ class HomeController extends Controller
         )->get()->toArray();
         return view('welcome', compact('products', 'events', 'category1', 'parent1'));
     }
+
     public function categoryDetail($id)
     {
         $events = ImageEvent::all();
@@ -72,8 +79,10 @@ class HomeController extends Controller
             ]
         )->where('id_category', '=', $id)->get()->toArray();
         $detailcategory = Category::find($id);
-        return view('categories.detail', compact('detailcategory', 'events', 'products', 'events', 'category1', 'parent1'));
+        return view('categories.detail', compact('detailcategory', 'events', 'products'
+            , 'events', 'category1', 'parent1'));
     }
+
     public function getSearch(Request $request)
     {
         $products = Product::where('name', 'like', '%' . $request->key . '%')->get();
