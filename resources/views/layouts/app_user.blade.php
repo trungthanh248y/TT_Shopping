@@ -168,15 +168,15 @@
                                     @else {{ __('Trống') }} @endif </span>
                             </a>
                             @if(Session::has('cart'))
-                                <div class="aa-cartbox-summary">
-                                    <ul>
-                                        @foreach($product_cart as $product)
-                                            <li>
-                                                <a class="aa-cartbox-img" href="#"><img style="width: 72px; height: 72px" src="{{asset('images/'.((count($product['item']->images)>0)?($product['item']->images[0]['name']):null))}}" alt=""></a>
-                                                <div class="aa-cartbox-info">
-                                                    <h4><a href="#">{{$product['item']['name']}}</a></h4>
-                                                    <p>{{$product['qty']}} X <span>@if($product['item']->event == null)
-                                                                {{number_format($product['item']['unit_price'])}}@else{{number_format($product['item']->event['promotion_price'])}}@endif
+                            <div class="aa-cartbox-summary">
+                                <ul>
+                                    @foreach($product_cart as $product)
+                                        <li>
+                                            <a class="aa-cartbox-img" href="#"><img style="width: 72px; height: 72px" src="{{asset('images/'.((count($product['item']->images)>0)?($product['item']->images[0]['name']):null))}}" alt=""></a>
+                                            <div class="aa-cartbox-info">
+                                                <h4><a href="#">{{$product['item']['name']}}</a></h4>
+                                                <p>{{$product['qty']}} X <span>@if($product['item']->id_event == null)
+                                                            {{number_format($product['item']['unit_price'])}}@else{{number_format($product['price'])}}@endif
                                             (<span>{{$product['item']['id_event']}}</span>)</span></p>
                                                 </div>
                                                 <a class="aa-remove-product" href="{{Route('xoagiohang',$product['item']['id'])}}"><span class="fa fa-times"></span></a>
