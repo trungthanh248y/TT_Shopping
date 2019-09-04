@@ -30,6 +30,7 @@ class HomeController extends Controller
         $categories = Category::all();
         $users = User::all();
         $products = Product::all();
+
         return view('home', compact('products', 'users', 'categories'));
     }
     public function manage()
@@ -52,7 +53,7 @@ class HomeController extends Controller
                 },
             ]
         )->get()->toArray();
-        return view('welcome', compact('products', 'events', 'categories', 'category1', 'category2', 'category3', 'category4', 'category5', 'category6', 'parent1', 'parent2', 'parent3', 'parent4', 'parent5'));
+        return view('welcome', compact('products', 'events', 'category1', 'parent1'));
     }
     public function categoryDetail($id)
     {
@@ -71,7 +72,7 @@ class HomeController extends Controller
             ]
         )->where('id_category', '=', $id)->get()->toArray();
         $detailcategory = Category::find($id);
-        return view('categories.detail', compact('detailcategory', 'events', 'products', 'events', 'categories', 'category1', 'category2', 'category3', 'category4', 'category5', 'parent1', 'parent2', 'parent3', 'parent4', 'parent5'));
+        return view('categories.detail', compact('detailcategory', 'events', 'products', 'events', 'category1', 'parent1'));
     }
     public function getSearch(Request $request)
     {
@@ -79,6 +80,6 @@ class HomeController extends Controller
         $events = ImageEvent::all();
         $category1 = Category::all()->where('id', '=', 1);
         $parent1 = Category::all()->where('id_parent', '=', 1);
-        return view('search', compact('products', 'categories', 'events', 'categories', 'category1', 'category2', 'category3', 'category4', 'category5', 'parent1', 'parent2', 'parent3', 'parent4', 'parent5'));
+        return view('search', compact('products', 'events', 'category1', 'parent1'));
     }
 }
