@@ -73,8 +73,8 @@ class ProductController extends Controller
                 }
                 $mess = "{{ __('Success add new') }}";
             }
-            //return redirect()->back();
-            return view('products.add', compact('categories', 'events'))->with('mess', $mess);
+            return redirect()->back();
+            //return view('products.add', compact('categories', 'events'))->with('mess', $mess);
         }
     }
 
@@ -111,7 +111,7 @@ class ProductController extends Controller
                     $mess = "{{ __('Success edit') }}";
                 }
                 return redirect()->back();
-//                return view('products.edit', compact('categories', 'product', 'events'))->with('mess', $mess);
+                //return view('products.edit', compact('categories', 'product', 'events'))->with('mess', $mess);
             }
         }
     }
