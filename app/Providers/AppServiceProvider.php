@@ -8,6 +8,8 @@ use App\Contracts\CommentRepositoryInterface;
 use App\Contracts\EventRepositoryInterface;
 use App\Contracts\ManageRepositoryInterface;
 use App\Contracts\ProductRepositoryInterface;
+use App\Contracts\RepositoryBill;
+use App\Repositories\Eloquents\BillRepositoryIn;
 use App\Repositories\Eloquents\CategoryRepositoryIn;
 use App\Repositories\Eloquents\CommentRepository;
 use App\Repositories\Eloquents\EventRepository;
@@ -26,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(['welcome','ShoppingCart.order','layouts.app_user','emails.newEmailUser'], function ($view) {
+        view()->composer(['welcome', 'ShoppingCart.order', 'layouts.app_user', 'emails.newEmailUser'], function ($view) {
             if (Session('cart')) {
                 $oldCart = Session::get('cart');
                 $cart = new Cart($oldCart);
@@ -45,12 +47,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(ProductRepositoryInterface::class,ProductRepositoryIn::class);
-        $this->app->singleton(EventRepositoryInterface::class,EventRepository::class);
-        $this->app->singleton(ManageRepositoryInterface::class,ManageRepository::class);
-        $this->app->singleton(ManageRepositoryInterface::class,ManageRepository::class);
-        $this->app->singleton(ManageRepositoryInterface::class,ManageRepository::class);
-        $this->app->singleton(CommentRepositoryInterface::class,CommentRepository::class);
-        $this->app->singleton(CategoryRepositoryInterface::class,CategoryRepositoryIn::class);
+        $this->app->singleton(ProductRepositoryInterface::class, ProductRepositoryIn::class);
+        $this->app->singleton(EventRepositoryInterface::class, EventRepository::class);
+        $this->app->singleton(ManageRepositoryInterface::class, ManageRepository::class);
+        $this->app->singleton(ManageRepositoryInterface::class, ManageRepository::class);
+        $this->app->singleton(ManageRepositoryInterface::class, ManageRepository::class);
+        $this->app->singleton(CommentRepositoryInterface::class, CommentRepository::class);
+        $this->app->singleton(CategoryRepositoryInterface::class, CategoryRepositoryIn::class);
+        $this->app->singleton(RepositoryBill::class, BillRepositoryIn::class);
     }
 }
