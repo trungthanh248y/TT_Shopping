@@ -105,7 +105,7 @@
                                                             <h4 class="aa-product-title"><a
                                                                         href="#">{{$product['name']}}</a></h4>
                                                             <span class="text-dark"><del>{{$product['unit_price']}}$</del></span>
-                                                            <span class="aa-product-price">{{$product['event']['promotion_price']}}$</span>
+                                                            <span class="aa-product-price">{{$product['unit_price'] - $product['event']['promotion_price']*$product['unit_price']/100}}$</span>
 
                                                         </figcaption>
                                                     </figure>
@@ -233,3 +233,4 @@
     <!-- / footer -->
     </body>
 @endsection
+
