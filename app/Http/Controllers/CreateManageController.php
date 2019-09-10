@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\ManageRepositoryInterface;
 use Illuminate\Http\Request;
 use App\User;
 
 class CreateManageController extends Controller
 {
+    public $manageRepository;
+
+    public function __construct(ManageRepositoryInterface $manageRepository)
+    {
+        $this->manageRepository = $manageRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,7 @@ class CreateManageController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(5);
+        $users = $this->manageRepository->getAll();
 
         return view('CreateManage.index', compact('users'));
     }
@@ -40,16 +48,14 @@ class CreateManageController extends Controller
     public function store(Request $request)
     {
         //
-        $users = new User();
+        $arr['name'] = $request->get('name');
+        $arr['email'] = $request->get('email');
+        $arr['password'] = bcrypt($request->get('password'));
+        $arr['role'] = 'manage';
+        $users = $this->manageRepository->create($arr);
         $mess = "";
-        if ($request->get('email')) {
-            $users->name = $request->get('name');
-            $users->email = $request->get('email');
-            $users->password = bcrypt($request->get('password'));
-            $users->role='manage';
-            if ($users->save()) {
-                $mess = "{{ __('success victory')}}";
-            }
+        if ($users) {
+            $mess = "{{ __('success victory')}}";
         }
 
         return redirect('indexManage')->with('mess', $mess);
@@ -65,7 +71,7 @@ class CreateManageController extends Controller
     public function edit($id)
     {
         //
-        $users = User::find($id);
+        $users = $this->manageRepository->find($id);
 
         return view('CreateManage.edit', compact('users'));
     }
@@ -79,20 +85,17 @@ class CreateManageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $users = User::find($id);
+        $arr['name'] = $request->get('name');
+        $arr['email'] = $request->get('email');
+        $arr['password'] = bcrypt($request->get('password'));
+        $arr['role'] = 'manage';
+        $users = $this->manageRepository->update($id, $arr);
         $mess = "";
-        if ($request->get('email')) {
-            $users->name = $request->get('name');
-            $users->email = $request->get('email');
-            $users->password = bcrypt($request->get('password'));
-            $users->role='manage';
-            if ($users->save()) {
-
-                $mess = "{{ __('success victory')}}";
-            }
+        if ($users) {
+            $mess = "{{ __('success victory')}}";
         }
 
-        return view('CreateManage.edit', compact('users'))->with('mess', $mess);
+        return redirect('indexManage')->with('mess', $mess);
     }
 
     /**
@@ -104,13 +107,15 @@ class CreateManageController extends Controller
     public function destroy(Request $request)
     {
         //
-        $users = User::find($request->id)->delete();
+        $users = $request->get('id');
+        $users = $this->manageRepository->delete($users);
         $mess = "";
         if ($users) {
 
-            $mess =  "{{ __('success victory')}}";
+            $mess = "{{ __('success victory')}}";
         }
 
         return redirect()->route('indexManage')->with('mess', $mess);
     }
 }
+
