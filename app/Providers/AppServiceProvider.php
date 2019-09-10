@@ -3,9 +3,13 @@
 namespace App\Providers;
 
 use App\Cart;
+use App\Contracts\CategoryRepositoryInterface;
+use App\Contracts\CommentRepositoryInterface;
 use App\Contracts\EventRepositoryInterface;
 use App\Contracts\ManageRepositoryInterface;
 use App\Contracts\ProductRepositoryInterface;
+use App\Repositories\Eloquents\CategoryRepositoryIn;
+use App\Repositories\Eloquents\CommentRepository;
 use App\Repositories\Eloquents\EventRepository;
 use App\Repositories\Eloquents\ManageRepository;
 use App\Repositories\Eloquents\ProductRepositoryIn;
@@ -44,6 +48,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(ProductRepositoryInterface::class,ProductRepositoryIn::class);
         $this->app->singleton(EventRepositoryInterface::class,EventRepository::class);
         $this->app->singleton(ManageRepositoryInterface::class,ManageRepository::class);
-
+        $this->app->singleton(ManageRepositoryInterface::class,ManageRepository::class);
+        $this->app->singleton(ManageRepositoryInterface::class,ManageRepository::class);
+        $this->app->singleton(CommentRepositoryInterface::class,CommentRepository::class);
+        $this->app->singleton(CategoryRepositoryInterface::class,CategoryRepositoryIn::class);
     }
 }

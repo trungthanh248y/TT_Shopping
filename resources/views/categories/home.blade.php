@@ -2,7 +2,7 @@
 @section('content')
     <body>
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800">{{ __('Table') }}
+        <h1 class="h3 mb-2 text-gray-800">{{ __('Quan ly danh muc') }}
             @if(session('mes_del'))
                 <p class="alert alert-success">{{session('mes_del')}}</p>
             @endif

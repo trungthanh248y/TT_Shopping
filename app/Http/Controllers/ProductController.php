@@ -59,6 +59,7 @@ class ProductController extends Controller
                 $mess = "{{ __('Success add new') }}";
             }
         }
+
         return view('products.add', compact('categories', 'events'))->with('mess', $mess);
     }
 
@@ -122,6 +123,7 @@ class ProductController extends Controller
         $events = $this->productRepository->ShowEvent($id);
         $category1 = $this->productRepository->categoryMenu();
         $parent1 = $this->productRepository->parentMenu();
+
         return view('products.detail', compact('categories', 'products'
             , 'category1', 'parent1', 'products_sale', 'events'
             , 'categories_detail', 'product_image', 'products_category', 'comments'));
@@ -130,6 +132,7 @@ class ProductController extends Controller
     public function getSearch(Request $request)
     {
         $products = $this->productRepository->getSearch($request);
+
         return view('products.search', compact('products'));
     }
 }

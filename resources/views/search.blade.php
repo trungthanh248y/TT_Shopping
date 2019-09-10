@@ -92,7 +92,7 @@
                                                     {{--                                                    ket thuc nut them vao gioi hang--}}
 
                                                 </li>
-                                        @endforeach
+                                           @endforeach
                                         <!-- start single product item -->
                                         </ul>
 {{--                                        {{$products->links()}}--}}

@@ -1,11 +1,10 @@
-
 @extends('layouts.app_admin')
 @section('content')
     <body>
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">{{ __('Table') }}
+        <h1 class="h3 mb-2 text-gray-800">{{ __('Quan ly nhan vien') }}
             @if(session('mess'))
                 <p class="alert alert-success">{{session('mess')}}</p>
             @endif
@@ -34,9 +33,7 @@
                             <th scope="col">{{ __('ID') }}</th>
                             <th scope="col">{{ __('Name') }}</th>
                             <th scope="col">{{ __('Email') }}</th>
-                            <th scope="col">{{ __('Password') }}</th>
                             <th scope="col">{{ __('EDIT') }}</th>
-
                         </tr>
                         </thead>
                         <tbody>
@@ -45,7 +42,6 @@
                                 <th scope="row">{!! $user->id !!}</th>
                                 <td>{!! $user->name !!}</td>
                                 <td>{!! $user->email !!}</td>
-                                <td>{!! $user->password !!}</td>
                                 <td>
                                     <a class="btn btn-info" href="{!! Route('editManage',$user->id) !!}"><i class="fas fa-user-edit"></i></a>
                                 </td>
