@@ -10,6 +10,8 @@ app/storage/
 # Laravel 5 & Lumen specific
 public/fonts
 public/scss
+public/bower_components
+public/storage
 public/css
 public/js
 public/image
