@@ -46,13 +46,17 @@
                                     <a class="btn btn-info"
                                        href="{!! Route('editCategory',$category->id) !!}"><i class="fas fa-edit"></i></a>
                                 </td>
-                                <td>
-                                    <form action="{!! Route('deleteCategory') !!}" method="post" >
-                                        <input type="hidden" name="category_id" value="{!! $category->id !!}">
-                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                        <input type="submit" value="{{ __('X') }}" class="btn btn-danger">
-                                    </form>
-                                </td>
+                                @if($category->id == 1)
+                                    <td></td>
+                                @else
+                                    <td>
+                                        <form action="{!! Route('deleteCategory') !!}" method="post" >
+                                            <input type="hidden" name="category_id" value="{!! $category->id !!}">
+                                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                            <input type="submit" value="{{ __('X') }}" class="btn btn-danger">
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>

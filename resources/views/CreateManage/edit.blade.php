@@ -7,10 +7,10 @@
         @endforeach
     @endif
     @if(session('mess'))
-        <p class="alert-success">{{ session('mess') }}</p>
+        <p class="alert alert-success">{!! session('mess') !!}</p>
     @endif
     <div class="container">
-        <form action='{{Route('updateManage',$users->id)}}' method="post" class="form-group ">
+        <form action='{{ Route('updateManage',$users->id) }}' method="post" class="form-group ">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
             <label for="text">{{ __('Name') }}</label>
             <input type="text" name="name" class="form-control" value="{{$users->name}}">

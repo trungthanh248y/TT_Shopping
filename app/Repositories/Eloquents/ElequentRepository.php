@@ -54,10 +54,12 @@ abstract class ElequentRepository implements RepositoryInterface
 
     public function update($id, array $arr)
     {
-        $temp=$this->find($id);
-        if($temp)
+        $temp = $this->find($id);
+
+        if ($temp)
         {
             $temp->update($arr);
+
             return $temp;
         }
         return false;
