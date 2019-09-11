@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Contracts\CategoryRepositoryInterface;
+use App\Contracts\HomeRepositoryInterface;
+use App\Contracts\ManageRepositoryInterface;
+use App\Contracts\ProductRepositoryInterface;
+use App\Contracts\EventRepositoryInterface;
 use App\ImageEvent;
 use App\Event;
-use App\Repositories\EventRepositoryInterface;
-use App\Repositories\UserRepositoryInterface;
-use App\Repositories\EventRepository;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,8 +22,23 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public $eventRepository;
+    public $categoryRepository;
+    public $manageRepository;
+    public $productRepository;
+    public $homeRepository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository
+        , ManageRepositoryInterface $manageRepository,
+                                ProductRepositoryInterface $productRepository
+        , EventRepositoryInterface $eventRepository,
+                                HomeRepositoryInterface $homeRepository)
     {
+        $this->manageRepository = $manageRepository;
+        $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->eventRepository = $eventRepository;
+        $this->homeRepository = $homeRepository;
     }
 
     /**
@@ -31,9 +48,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        $users = User::all();
-        $products = Product::all();
+        $categories = $this->categoryRepository->getAll();
+        $users = $this->manageRepository->getAll();
+        $products = $this->productRepository->getAll();
 
         return view('home', compact('products', 'users', 'categories'));
     }
@@ -45,50 +62,34 @@ class HomeController extends Controller
 
     public function welcome()
     {
-        $events = ImageEvent::all();
-        $category1 = Category::all()->where('id', '=', 1);
-        $parent1 = Category::all()->where('id_parent', '=', 1);
-        $products = Product::with
-        (
-            [
-                'event' => function ($query) {
-                    $query->select(['id', 'promotion_price']);
-                },
-                'images' => function ($query) {
-                    $query->select(['id_product', 'name']);
-                },
-            ]
-        )->get()->toArray();
+        $events = $this->eventRepository->getAll();
+        $category1 = $this->eventRepository->categoryEvent();
+        $parent1 = $this->eventRepository->parentEvent();
+        $products = $this->homeRepository->getEventImageOfProduct();
+
         return view('welcome', compact('products', 'events', 'category1', 'parent1'));
     }
 
     public function categoryDetail($id)
     {
-        $events = ImageEvent::all();
-        $category1 = Category::all()->where('id', '=', 1);
-        $parent1 = Category::all()->where('id_parent', '=', 1);
-        $products = $product_image = Product::with
-        (
-            [
-                'event' => function ($query) {
-                    $query->select(['id', 'promotion_price']);
-                },
-                'images' => function ($query) {
-                    $query->select(['id_product', 'name']);
-                },
-            ]
-        )->where('id_category', '=', $id)->get()->toArray();
-        $detailcategory = Category::find($id);
+        $events = $this->eventRepository->getAll();
+        $category1 = $this->eventRepository->categoryEvent();
+        $parent1 = $this->eventRepository->parentEvent();
+        $products = $product_image = $this->homeRepository->getEventImageOfProductDetail($id);
+        $detailcategory = $this->categoryRepository->find($id);
+
         return view('categories.detail', compact('detailcategory', 'events', 'products'
             , 'events', 'category1', 'parent1'));
     }
 
     public function getSearch(Request $request)
     {
-        $products = Product::where('name', 'like', '%' . $request->key . '%')->get();
-        $events = ImageEvent::all();
-        $category1 = Category::all()->where('id', '=', 1);
-        $parent1 = Category::all()->where('id_parent', '=', 1);
+        $products = $this->productRepository->getSearch($request);
+        $events = $this->eventRepository->getAll();
+        $category1 = $this->eventRepository->categoryEvent();
+        $parent1 = $this->eventRepository->parentEvent();
+
         return view('search', compact('products', 'events', 'category1', 'parent1'));
     }
 }
+

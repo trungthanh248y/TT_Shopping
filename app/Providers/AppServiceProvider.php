@@ -6,6 +6,7 @@ use App\Cart;
 use App\Contracts\CategoryRepositoryInterface;
 use App\Contracts\CommentRepositoryInterface;
 use App\Contracts\EventRepositoryInterface;
+use App\Contracts\HomeRepositoryInterface;
 use App\Contracts\ManageRepositoryInterface;
 use App\Contracts\ProductRepositoryInterface;
 use App\Contracts\RepositoryBill;
@@ -13,6 +14,7 @@ use App\Repositories\Eloquents\BillRepositoryIn;
 use App\Repositories\Eloquents\CategoryRepositoryIn;
 use App\Repositories\Eloquents\CommentRepository;
 use App\Repositories\Eloquents\EventRepository;
+use App\Repositories\Eloquents\HomeRepository;
 use App\Repositories\Eloquents\ManageRepository;
 use App\Repositories\Eloquents\ProductRepositoryIn;
 use Illuminate\Support\Facades\Schema;
@@ -55,5 +57,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(CommentRepositoryInterface::class, CommentRepository::class);
         $this->app->singleton(CategoryRepositoryInterface::class, CategoryRepositoryIn::class);
         $this->app->singleton(RepositoryBill::class, BillRepositoryIn::class);
+        $this->app->singleton(HomeRepositoryInterface::class, HomeRepository::class);
+
     }
 }
