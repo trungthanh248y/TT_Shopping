@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Contracts\ProductRepositoryInterface;
+use App\Contracts\RepositoryBill;
 use App\Mail\SendEmail;
 use App\Product;
 use Illuminate\Http\Request;
@@ -16,27 +18,23 @@ use Illuminate\Support\Facades\DB;
 
 class CreateShopingCartController extends Controller
 {
+    public $productRepository;
+    public $billRepository;
+
+    public function __construct(ProductRepositoryInterface $productRepository, RepositoryBill $billRepository)
+    {
+        $this->productRepository = $productRepository;
+        $this->billRepository = $billRepository;
+    }
+
     public function getAddtoCart(Request $request, $id)
     {
-        $product = Product::find($id);
+        $product = $this->productRepository->find($id);
         $oldCart = Session('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $id);
         $request->session()->put('cart', $cart);
 
-//        DB::transaction(function (Request $request, $id){
-//            try{
-//                $product = Product::find($id);
-//                $oldCart = Session('cart') ? Session::get('cart') : null;
-//                $cart = new Cart($oldCart);
-//                $cart->add($product, $id);
-//                $request->session()->put('cart', $cart);
-//                DB::commit();
-//            }
-//            catch (\Exception $e){
-//                DB::rollback();
-//            }
-//        });
         return redirect()->back();
     }
 
@@ -65,23 +63,23 @@ class CreateShopingCartController extends Controller
         $cart = Session::get('cart');
 
         if (Auth::user()->id && count($cart->items)) {
-            $bill = new Bill();
-            $bill->id_user = Auth::user()->id;
-            $bill->total = $cart->totalPrice;
-            $bill->status = $request->status;
-            $bill->payment = $request->payment;
-            $bill->created_at = date('Y-m-d H:i:s');
-            $bill->updated_at = date('Y-m-d H:i:s');
-            if ($bill->save()) {
+            $arr['id_user'] = Auth::user()->id;
+            $arr['total'] = $cart->totalPrice;
+            $arr['status'] = $cart->status;
+            $arr['payment'] = $cart->payment;
+            $arr['created_at'] = date('Y-m-d H:i:s');
+            $arr['updated_at'] = date('Y-m-d H:i:s');
+            $new_bill = $this->billRepository->create($arr);
+            $id = $new_bill->id;
+            if ($id) {
                 $mess = "{{ __('Đặt hàng thành công') }}";
                 foreach ($cart->items as $k => $v) {
-                    $bill_detail = new Bill_Detail();
-                    $bill_detail->id_bill = $bill->id;
-                    $bill_detail->id_product = $k;
-                    $bill_detail->quantity = $v['qty'];
-                    $bill_detail->save();
+                    $bill_deatil['id_product'] = $k;
+                    $bill_deatil['quantity'] = $v['qty'];
+                    $bill_deatil['id_bill'] = $id;
+                    $this->billRepository->SaveBillDetail($bill_deatil);
                 }
-                Mail::to(Auth::user()->email)->send(new SendEmail($bill));
+                Mail::to(Auth::user()->email)->send(new SendEmail($new_bill));
                 Session::forget('cart');
 
                 return redirect()->route('welcome')->with('mess', $mess);

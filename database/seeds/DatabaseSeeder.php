@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CommentTableSeeder::class);
         $this->call(BillsTaleSeeder::class);
         $this->call(BillDetailTaleSeeder::class);
+        $this->call(ImageEventTableSeed::class);
     }
 }

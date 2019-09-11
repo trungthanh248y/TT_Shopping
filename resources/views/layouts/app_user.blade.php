@@ -7,9 +7,34 @@
     <title>{{ __('Daily Shop') }} | {{ __('Home') }}</title>
 
     <!-- Font awesome -->
-    <link href="{{ asset('bower_components/Font-Awesome/css/all.css') }}" rel="stylesheet">
+    <!-- Font awesome -->
+
     <!-- Bootstrap -->
-    <link href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet">
+
+    <!-- SmartMenus jQuery Bootstrap Addon CSS -->
+
+    <!-- Product view slider -->
+
+    <!-- slick slider -->
+
+
+    <!-- Top Slider CSS -->
+
+    <!-- Main style sheet -->
+
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <![endif]-->
+    <link href=" {{ asset('css/font-awesome.css') }} " rel="stylesheet">
+    <link href="{{ asset('fontawesome-free-5.9.0-web/css/all.min.css') }}" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <!-- SmartMenus jQuery Bootstrap Addon CSS -->
     <link href="{{ asset('css/jquery.smartmenus.bootstrap.css') }}" rel="stylesheet">
     <!-- Product view slider -->
@@ -80,12 +105,14 @@
                         <div class="aa-header-top-right">
                             <ul class="aa-head-top-nav-right">
                                 @guest
-                                    <li><a href="#">{{ __('My Account') }}</a></li>
                                     <li><a href="{{Route('login')}}">{{ __('Login') }}</a></li>
-
+                                    <li><a href="{{Route('register')}}">{{ __('Register') }}</a></li>
                                 @else
 
                                     <li class="nav-item dropdown">
+                                        <a href="{{Route('home')}}">{{ __('Trang quản lý') }}</a>
+
+
                                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                             {{ Auth::user()->name }} <span class="caret"></span>
