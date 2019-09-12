@@ -102,15 +102,17 @@ class ProductRepositoryIn extends ElequentRepository implements ProductRepositor
         return ImageEvent::find($id);
     }
 
-    public function getSearch($id)
+    public function getSearch($request)
     {
         return Product::where('name', 'like', '%' . $request->key . '%')->get();
     }
+
     public function categoryMenu()
     {
         $category1 = Category::all()->where('id', '=', 1);
         return $category1;
     }
+
     public function parentMenu()
     {
         $parent1 = Category::all()->where('id_parent', '=', 1);

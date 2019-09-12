@@ -20,6 +20,7 @@ class EventController extends Controller
     public function index()
     {
         $events = $this->eventRepository->allEvent();
+
         return view('events.home', compact('events'));
     }
 
@@ -36,7 +37,7 @@ class EventController extends Controller
         $arr['end_promotion'] = $request->get('end_promotion');
         $event = $this->eventRepository->create($arr);
         $mess = "";
-        if ($event->save()) {
+        if ($event) {
             $mess = "Success add new";
         }
 
@@ -46,6 +47,7 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = $this->eventRepository->findEvent($id);
+
         return view('events.edit', compact('event'));
     }
 
@@ -57,16 +59,16 @@ class EventController extends Controller
         $arr['end_promotion'] = $request->get('end_promotion');
         $event = $this->eventRepository->update($id, $arr);
         $mess = "";
-        if ($event->save()) {
-            $mess = "Success edit";
+        if ($event) {
+            $mess = "{{ __('success victory')}}";
         }
-        return view('events.edit', compact('event'))->with('mess', $mess);
+        return redirect('home')->with('mess', $mess);
     }
 
     public function delete(Request $request)
     {
         $event = $request->get('event_id');
-            $this->eventRepository->delete($event);
+        $this->eventRepository->delete($event);
         return redirect()->route('indexEvent')->with('mes_del', 'Delete success');
     }
 
@@ -79,6 +81,7 @@ class EventController extends Controller
         $category1 = $this->eventRepository->categoryEvent();
         $parent1 = $this->eventRepository->parentEvent();
         $detailcategory = $this->eventRepository->findCategory($id);
+
         return view('events.detail', compact('event', 'products', 'detailcategory', 'events', 'products', 'events', 'category1', 'parent1'));
     }
 }
