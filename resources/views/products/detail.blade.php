@@ -12,22 +12,28 @@
                                     <div class="aa-product-view-slider">
                                         <div id="demo-1" class="simpleLens-gallery-container">
                                             <div class="simpleLens-container">
-                                                @if(count($product_image[0]['images']) == 0)
+                                                @if (count($product_image[0]['images']) == 0)
                                                     {{ __('no image') }}
                                                 @else
-                                                    <?php $image=($product_image[0]['images']);?>
-                                                    <div class="simpleLens-big-image-container"><a data-lens-image="{{ asset('images/'. $product_image[0]['images'][0]['name'] )}}" class="simpleLens-lens-image"><img src="{{ asset('images/'. $product_image[0]['images'][0]['name'] )}}" class="simpleLens-big-image"></a></div>
+                                                    @php $image = ($product_image[0]['images']);@endphp
+                                                    <div class="simpleLens-big-image-container"><a
+                                                                data-lens-image="{{ asset('images/'. $product_image[0]['images'][0]['name'] )}}"
+                                                                class="simpleLens-lens-image"><img
+                                                                    src="{{ asset('images/'. $product_image[0]['images'][0]['name'] )}}"
+                                                                    class="simpleLens-big-image"></a></div>
                                                 @endif
                                             </div>
                                             <div class="simpleLens-thumbnails-container">
-                                                @if(count($product_image[0]['images']) == 0)
+                                                @if (count($product_image[0]['images']) == 0)
                                                     {{ __('no image') }}
                                                 @else
-                                                    <?php $image=($product_image[0]['images']);?>
+                                                    @php $image = ($product_image[0]['images']);@endphp
                                                     @foreach ($image as $images)
-                                                        <a data-big-image="{{ asset('images/'.((count($product_image[0]['images'])!=0) ? ($images['name']): 'K co anh')) }}" data-lens-image="{{ asset('images/'.((count($product_image[0]['images'])!=0) ? ($images['name']): 'K co anh')) }}" class="simpleLens-thumbnail-wrapper" href="#">
-                                                            <img src="{{ asset('images/'.((count($product_image[0]['images'])!=0) ? ($images['name']): 'K co anh')) }}" width="50" height="50">
-                                                        </a>
+                                                        <a data-big-image="{{ asset('images/'. ((count($product_image[0]['images'])!=0) ? ($images['name']): 'K co anh')) }}"
+                                                           data-lens-image="{{ asset('images/'. ((count($product_image[0]['images'])!=0) ? ($images['name']): 'K co anh')) }}"
+                                                           class="simpleLens-thumbnail-wrapper" href="#">
+                                                            <img src="{{ asset('images/'. ((count($product_image[0]['images'])!=0) ? ($images['name']): 'K co anh')) }}"
+                                                                 style="width: 50px; height: 50px">                                                        </a>
                                                     @endforeach
                                                 @endif
                                             </div>
@@ -50,16 +56,19 @@
                                         <br>
                                         <div class="aa-prod-quantity">
                                             <form action="/action_page.php">
-                                                <input class="text-danger" type="number" name="quantity" min="1" max="10" value="1">
+                                                <input class="text-danger" type="number" name="quantity" min="1"
+                                                       max="10" value="1">
                                             </form>
 
                                             <div class="aa-prod-category">
-                                                Category: <a href="{{Route('categorydetail',$categories_detail)}}">{{$products_category[0]['category']['name']}}</a>
+                                                Category: <a
+                                                        href="{{ Route('categorydetail', $categories_detail)}}">{{$products_category[0]['category']['name'] }}</a>
                                             </div>
                                         </div>
                                         <br><br><br><br>
                                         <div class="aa-prod-view-bottom">
-                                            <a class="aa-add-to-cart-btn" href="{{Route('themgiohang',$products['id'])}}">{{ __('Add To Cart') }}</a>
+                                            <a class="aa-add-to-cart-btn"
+                                               href="{{Route('themgiohang', $products['id'])}}">{{ __('Add To Cart') }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -74,6 +83,28 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="description">
+                                    <p>
+                                    <h3><strong>{{ __('Thiết kế bền bỉ, chắc chắn') }}</strong></h3></p>
+                                    <p>{{$products->name}} {{ __('mang tính di động với kích thước 25mm dành cho dòng laptop gaming') }}
+                                        , {{$products->name}} {{ __('đem lại khả năng chơi game mạnh mẽ mọi lúc mọi nơi. Thiết kế bền bỉ với hợp kim magiê siêu bền bao bọc xung quanh khung máy đem lại độ cứng cáp tốt nhất và bề mặt bàn phím với chất liệu kim loại phay xước cho một cảm giác gõ phím mượt mà') }}</p>
+                                    <p>
+                                    <h3><strong>{{ __('Màn hình LED 15.6 inch Full HD, IPS') }}
+                                        </strong></h3></p>
+                                    <p>{{ __('Màn hình 15.6 inch với độ phân giải Full HD (1920 x 1080), công nghệ màn hình LED-Backlit mang đến những hình ảnh chất lượng, chi tiết, rõ nét, màu sắc cũng cực kỳ trung thực và sống động. Kết hợp màn hình IPS còn cung cấp góc nhìn lên tới 178 độ so với phương ngang, điều này có nghĩa là người dùng không nhất thiết phải ngồi trực diện vẫn có thể trải nghiệm hết chất lượng của hình ảnh, tấm nền chống chói Anti-glare giúp bạn có thể trải nghiệm tốt hơn ở môi trường bên ngoài, có khả năng chống chói tốt.') }}</p>
+                                    @if (count($product_image[0]['images']) == 0)
+                                        {{ __('no image') }}
+                                    @else
+                                        @php $image = ($product_image[0]['images']);@endphp
+                                        <center><img
+                                                    src="{{ asset('images/'. $product_image[0]['images'][0]['name'] )}}"
+                                                   style="width: 750px;height: 450px">
+                                        </center>                                    @endif
+                                    <p>
+                                    <h3><strong>{{ __('Bộ vi xử lý Intel Core i7') }}</strong></h3></p>
+                                    <p>{{ __('Máy được trang bị bộ vi xử lý Intel Core i7-8750H với xung nhịp 4.1GHz, cho bạn những giây phút lướt web nhanh hơn, mạnh mẽ hơn. Bên cạnh đó, với bộ nhớ trong Ram 8GB DDR4 (2400MHz) đảm bảo xử lí các tác vụ đa nhiệm thật mượt mà và ổn định. Ngoài ra, máy còn trang bị thêm ổ cứng kép 1TB+128Gb SSD, cho bạn lưu trữ cũng như vận hành máy một cách nhanh chóng, mượt mà hơn.') }}</p>
+                                    <p>
+                                    <h3><strong>{{ __('Card đồ họa NVIDIA GeForce') }}</strong></h3></p>
+                                    <p>{{ __('Máy được trang bị bộ vi xử lý Intel Core i7-8750H với xung nhịp 4.1GHz, cho bạn những giây phút lướt web nhanh hơn, mạnh mẽ hơn. Bên cạnh đó, với bộ nhớ trong Ram 8GB DDR4 (2400MHz) đảm bảo xử lí các tác vụ đa nhiệm thật mượt mà và ổn định. Ngoài ra, máy còn trang bị thêm ổ cứng kép 1TB+128Gb SSD, cho bạn lưu trữ cũng như vận hành máy một cách nhanh chóng, mượt mà hơn.') }}</p>
                                     <p>{{$products->description}}</p>
                                 </div>
                                 <div class="tab-pane fade " id="review">
@@ -85,11 +116,15 @@
                                                     <div class="media">
                                                         <div class="media-left">
                                                             <a href="#">
-                                                                <img class="media-object" src="https://postmediatorontosun.files.wordpress.com/2019/07/stephanie1000.jpg?quality=80&strip=all&w=412&h=458&crop=1" alt="girl image">
+                                                                <img class="media-object"
+                                                                     src="https://postmediatorontosun.files.wordpress.com/2019/07/stephanie1000.jpg?quality=80&strip=all&w=412&h=458&crop=1"
+                                                                     alt="girl image">
                                                             </a>
                                                         </div>
                                                         <div class="media-body">
-                                                            <h4 class="media-heading"><strong><?php echo(App\User::find($comment['id_user'])?(App\User::find($comment['id_user'])->name):'manage') ?></strong> - <span>{{$comment->created_at}}</span></h4>
+                                                            <h4 class="media-heading">
+                                                                <strong>@php echo(App\User::find($comment['id_user']) ? (App\User::find($comment['id_user'])->name) : 'manage') @endphp</strong>
+                                                                - <span>{{$comment->created_at}}</span></h4>
                                                             <div class="aa-product-rating">
                                                             </div>
                                                             <p>{{ $comment->content }}</p>
@@ -101,7 +136,8 @@
                                         <h4>{{ __('Add a review') }}</h4>
                                         <!-- review form -->
                                         @if(Auth::check())
-                                            <form action="{{Route('addcomment',$products->id)}}" method="post" class="aa-review-form">
+                                            <form action="{{Route('addcomment', $products->id)}}" method="post"
+                                                  class="aa-review-form">
                                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                                 <div class="form-group">
                                                     <label for="message">{{ __('Your Review') }}</label>
