@@ -104,7 +104,7 @@ class ProductRepositoryIn extends ElequentRepository implements ProductRepositor
 
     public function getSearch($request)
     {
-        return Product::where('name', 'like', '%' . $request->key . '%')->get();
+        return Product::search($request->key)->with('bill_detail')->get();
     }
 
     public function categoryMenu()
