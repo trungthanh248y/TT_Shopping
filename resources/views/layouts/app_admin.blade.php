@@ -12,12 +12,12 @@
 
     <title>Admin</title>
 
-    <link href="{{asset('bower_components/Font-Awesome/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('bower_components/Font-Awesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -26,7 +26,7 @@
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{Route('home')}}">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ Route('home') }}">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-users-cog"></i>
             </div>
@@ -37,7 +37,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="{{Route('welcome')}}">
+            <a class="nav-link" href="{{ Route('welcome') }}">
                 <i class="fas fa-home"></i>
                 <span>{{ __('Home') }}</span></a>
         </li>
@@ -52,29 +52,34 @@
         </div>
         <!-- Nav Item - Tables -->
         <li class="nav-item">
-            <a class="nav-link" href="{{asset('/product')}}">
+            <a class="nav-link" href="{{ asset('/product') }}">
                 <i class="fas fa-tshirt"></i>
                 <span>{{ __('Quản lý sản phẩm') }}</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{Route('indexCategory')}}">
+            <a class="nav-link" href="{{ Route('indexCategory') }}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>{{ __('Quản lý danh mục') }}</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{Route('indexManage')}}">
+            <a class="nav-link" href="{{ Route('indexManage') }}">
                 <i class="fas fa-user"></i>
                 <span>{{ __('Quản lý nhân viên') }}</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{Route('indexComment')}}">
+            <a class="nav-link" href="{{ Route('indexComment') }}">
                 <i class="fas fa-comment"></i>
                 <span>{{ __('Quản lý comments') }}</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{Route('indexEvent')}}">
+            <a class="nav-link" href="{{ Route('indexEvent') }}">
                 <i class="fas fa-mobile"></i>
                 <span>{{ __('Quản lý event') }}</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ Route('indexBill') }}">
+                <i class="fas fa-mobile"></i>
+                <span>{{ __('Quản lý đơn hàng') }}</span></a>
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
@@ -138,7 +143,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span> {{ __('Copyright &copy; Your Website 2019') }}</span>
         </div>
     </div>
 </footer>
@@ -148,12 +153,13 @@
     <i class="fas fa-angle-up"></i>
 </a>
 <!-- Bootstrap core JavaScript-->
-<script src="{{asset('js/jquery.min.js')}}"></script>
-<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+<script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
 
 </body>
 </html>
+
