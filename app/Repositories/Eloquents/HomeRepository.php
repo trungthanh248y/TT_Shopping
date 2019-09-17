@@ -2,13 +2,16 @@
 
 namespace App\Repositories\Eloquents;
 
+use App\Comment;
 use App\Contracts\HomeRepositoryInterface;
+use App\Event;
 use App\Product;
 
 class HomeRepository extends ElequentRepository implements HomeRepositoryInterface
 {
     public function getModel()
     {
+        return Event::class;
     }
 
     public function getEventImageOfProduct()
