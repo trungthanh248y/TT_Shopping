@@ -132,7 +132,7 @@ class ProductController extends Controller
     public function getSearch(Request $request)
     {
         $products = $this->productRepository->getSearch($request);
-
+        //có thể sử dụng $products[0]['bill_detail'] để lấy quan hệ giữa 2 bảng nhờ joins trong model
         return view('products.search', compact('products'));
     }
 }
