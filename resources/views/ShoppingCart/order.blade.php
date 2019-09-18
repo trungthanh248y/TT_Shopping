@@ -34,7 +34,9 @@
                                         <br>
                                         <h4 class="media-heading"><a href="#">{{$product['item']['name']}}</a></h4>
                                         <span>Status: </span><span class="text-success"><strong>{{ __('Sending') }}</strong></span>
-                                        <input type="hidden" name="status" value="sending">
+                                        <input type="hidden" name="status" value="sending"><br>
+                                        <span>Payment: </span><span class="text-success"><strong>{{ __('ATM') }}</strong></span>
+                                        <input type="hidden" name="payment" value="ATM">
                                     </div>
                                 </div></td>
                             <td class="col-sm-1 col-md-1" style="text-align: center">
