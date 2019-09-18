@@ -3,15 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Bill;
+use App\Bill_Detail;
+use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 
 class BillController extends Controller
 {
     public function index()
     {
-        $bills = Bill::all();
+        $bills = Bill_Detail::all();
+        foreach ($bills as $bill) {
+            $nameUser = User::find(Bill::find($bill->id_bill)->id_user)['name'];
+            $nameProduct = Product::find($bill->id_product)['name'];
+            $totalBill = Bill::find($bill->id_bill)->total;
+            $paymentBill = Bill::find($bill->id_bill)->payment;
+            $statusBill = Bill::find($bill->id_bill)->status;
+        }
 
-        return view('bills.home', compact('bills'));
+        return view('bills.home', compact('bills', 'nameUser', 'nameProduct',
+            'totalBill', 'paymentBill', 'statusBill'));
     }
 
     public function create()

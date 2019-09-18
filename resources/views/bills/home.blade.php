@@ -27,20 +27,28 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">{{ __('Payment') }}</th>
-                            <th scope="col">{{ __('Total') }}</th>
-                            <th scope="col">{{ __('Status') }}</th>
+                            <th scope="col">{{ __('Người mua hàng') }}</th>
+                            <th scope="col">{{ __('Tên sản phẩm') }}</th>
+                            <th scope="col">{{ __('Số lượng') }}</th>
+                            <th scope="col">{{ __('Tổng tiền') }}</th>
+                            <th scope="col">{{ __('Hình thức thanh toán') }}</th>
+                            <th scope="col">{{ __('Trạng thái') }}</th>
+                            <th scope="col">{{ __('Thời gian đặt hàng') }}</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($bills as $bill)
                             <tr>
                                 <th scope="row">{!! $bill->id !!}</th>
-                                <td>{!! $bill->payment !!}</td>
-                                <td>{!! $bill->total !!}</td>
-                                <td>{!! $bill->status !!}</td>
+                                <td>{{ $nameUser }}</td>
+                                <td>{{ $nameProduct }}</td>
+                                <td>{!! $bill->quantity !!}</td>
+                                <td>{!! $totalBill !!}</td>
+                                <td>{{ $paymentBill }}</td>
+                                <td>{{ $statusBill }}</td>
+                                <td>{{ $bill->created_at }}</td>
                             </tr>
-                            @endforeach
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
