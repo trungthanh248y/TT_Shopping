@@ -14,15 +14,15 @@ class BillController extends Controller
     {
         $bills = Bill_Detail::all();
         foreach ($bills as $bill) {
-            $nameUser = User::find(Bill::find($bill->id_bill)->id_user)['name'];
-            $nameProduct = Product::find($bill->id_product)['name'];
-            $totalBill = Bill::find($bill->id_bill)->total;
-            $paymentBill = Bill::find($bill->id_bill)->payment;
-            $statusBill = Bill::find($bill->id_bill)->status;
+            $bill_Detail[$bill->id]['nameUser'] = User::find(Bill::find($bill->id_bill)['id_user'])['name'];
+            $bill_Detail[$bill->id]['nameProduct'] = Product::find($bill->id_product)['name'];
+            $bill_Detail[$bill->id]['totalBill'] = Bill::find($bill->id_bill)['total'];
+            $bill_Detail[$bill->id]['paymentBill'] = Bill::find($bill->id_bill)['payment'];
+            $bill_Detail[$bill->id]['statusBill'] = Bill::find($bill->id_bill)['status'];
+            $bill_Detail[$bill->id]['quantity'] = $bill->quantity;
+            $bill_Detail[$bill->id]['created_at'] = $bill->created_at;
         }
-
-        return view('bills.home', compact('bills', 'nameUser', 'nameProduct',
-            'totalBill', 'paymentBill', 'statusBill'));
+        return view('bills.home', compact('bills', 'bill_Detail'));
     }
 
     public function create()

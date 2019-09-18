@@ -37,16 +37,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($bills as $bill)
+                        @foreach($bill_Detail as $k=>$bill)
                             <tr>
-                                <th scope="row">{!! $bill->id !!}</th>
-                                <td>{{ $nameUser }}</td>
-                                <td>{{ $nameProduct }}</td>
-                                <td>{!! $bill->quantity !!}</td>
-                                <td>{!! $totalBill !!}</td>
-                                <td>{{ $paymentBill }}</td>
-                                <td>{{ $statusBill }}</td>
-                                <td>{{ $bill->created_at }}</td>
+                                <th scope="row">{!! $k !!}</th>
+                                <td>{{ $bill['nameUser'] }}</td>
+                                <td>{{ $bill['nameProduct'] }}</td>
+                                <td>{!! $bill['quantity'] !!}</td>
+                                <td>{!! $bill['totalBill'] !!}</td>
+                                <td>{{ $bill['paymentBill'] }}</td>
+                                <td>{{ $bill['statusBill'] }}</td>
+                                <td>{{ $bill['created_at'] }}</td>
                             </tr>
                         @endforeach
                         </tbody>
