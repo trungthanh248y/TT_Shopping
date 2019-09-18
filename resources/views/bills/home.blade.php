@@ -39,7 +39,6 @@
                         <tbody>
                         @foreach($bill_Detail as $k=>$bill)
                             <tr>
-                            <form action="{{ Route('editBill', $k) }}" method="post">
                                 <th scope="row">{!! $k !!}</th>
                                 <td>{{ $bill['nameUser'] }}</td>
                                 <td>{{ $bill['nameProduct'] }}</td>
@@ -48,8 +47,6 @@
                                 <td>{{ $bill['paymentBill'] }}</td>
                                 <td>{{ $bill['statusBill'] }}</td>
                                 <td>{{ $bill['created_at'] }}</td>
-                                <td><input type="submit" class="btn btn-danger" value="Edit Status"></td>
-                            </form>
                             </tr>
                         @endforeach
                         </tbody>
