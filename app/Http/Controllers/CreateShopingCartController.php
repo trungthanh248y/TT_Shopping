@@ -65,8 +65,8 @@ class CreateShopingCartController extends Controller
         if (Auth::user()->id && count($cart->items)) {
             $arr['id_user'] = Auth::user()->id;
             $arr['total'] = $cart->totalPrice;
-            $arr['status'] = $cart->status;
-            $arr['payment'] = $cart->payment;
+            $arr['status'] = $request->status;
+            $arr['payment'] = $request->payment;
             $arr['created_at'] = date('Y-m-d H:i:s');
             $arr['updated_at'] = date('Y-m-d H:i:s');
             $new_bill = $this->billRepository->create($arr);

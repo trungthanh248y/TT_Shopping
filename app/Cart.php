@@ -27,7 +27,7 @@ class Cart extends Model
     public function add($item, $id)
     {
         //product->event hay có thể hiểu item->event mới lấy ra được promotion_price
-        $ProductEvent = ImageEvent::find($item->id_event)->promotion_price;
+        $ProductEvent = ImageEvent::find($item->id_event)['promotion_price'];
         $donGia = $item->unit_price - (($ProductEvent * $item->unit_price) / 100);
         if ($item->id_event == null) {
             $giohang = ['qty' => 0, 'price' => $item->unit_price, 'item' => $item];
