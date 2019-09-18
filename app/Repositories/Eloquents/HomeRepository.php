@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Eloquents;
 
+use App\Comment;
 use App\Contracts\HomeRepositoryInterface;
 use App\Event;
 use App\Product;
