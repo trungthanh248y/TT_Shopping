@@ -31,16 +31,22 @@ class ProductRepositoryIn extends ElequentRepository implements ProductRepositor
         return Category::all();
     }
 
-    public function storeProductImage($v, $product_id)
+    public function storeProductImage($i, $productId)
     {
         $images = new Image();//phải tạo ảnh ở đây vì với mỗi ảnh cần lưu vào hàng, nếu k có thì nó sẽ ghi đè lên
 
-        $filename = $v->getClientOriginalName();
-        $location = $v->move(public_path() . '/images/', $filename);
+        $filename = [];
+        foreach ($i as $k=>$v)
+        {
+            $filename[$k] = $v->getClientOriginalName();
+            $location = $v->move(public_path() . '/images/', $filename[$k]);
 
-        $images->name = $filename;
-        $images->id_product = $product_id;
-        return $images->save();
+            $arr[] = ['name'=>  $v->getClientOriginalName(), 'id_product' => $productId];
+        }
+//        $images->name = $filename;
+//        $images->id_product = $product_id;
+
+        return $images->insert($arr);
     }
 
     public function deleteProductImage($id)

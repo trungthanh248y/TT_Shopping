@@ -12,6 +12,7 @@ use App\Repositories\Eloquents\ProductRepositoryIn;
 use App\Product;
 use App\Category;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\ResoureProducts;
 
 class ProductController extends Controller
 {
@@ -26,7 +27,9 @@ class ProductController extends Controller
     {
         $products = $this->productRepository->getAll();
 
-        return view('products.home', compact('products'));
+//        $products->load('event'); sử dụng thay cho with dưới return kết quả trả về là như nhau
+//        return view('products.home', compact('products'));
+        return ResoureProducts::collection(Product::with(['event', 'images'])->get());
     }
 
     public function create()
@@ -46,16 +49,21 @@ class ProductController extends Controller
         $mess = "";
         $image = $request->file;
         if (count($image) != 0) {
-            $arr['name'] = $request->get('name');
-            $arr['description'] = $request->get('description');
-            $arr['unit_price'] = $request->get('unit_price');
-            $arr['id_category'] = $request->get('id_category');
-            $arr['id_event'] = $request->get('id_event');
-            $id = $this->productRepository->create($arr)->id;
-            if ($id) {
-                foreach ($image as $k => $v) {
-                    $this->productRepository->storeProductImage($v, $id);
-                }
+
+            $data = $request->except(['file', 'btnsubmit']);
+
+//            $product = $this->productRepository->create($data);
+//
+//            // create -> 1 record
+//            // insert
+//
+//            $product->images()->insert($imageData);
+
+            $id = $this->productRepository->create($data)->id;
+
+            $check = $this->productRepository->storeProductImage($image, $id);
+
+            if ($check) {
                 $mess = "{{ __('Success add new') }}";
             }
         }
@@ -103,9 +111,9 @@ class ProductController extends Controller
 
     public function delete(Request $request)
     {
-        $product_id = $request->get('product_id');
-        if ($this->productRepository->delete($product_id)) {
-            $this->productRepository->deleteProductImage($product_id);
+        $productId = $request->get('product_id');
+        if ($this->productRepository->delete($productId)) {
+            $this->productRepository->deleteProductImage($productId);
         }
 
         return redirect()->route('indexProduct')->with('mes_del', "{{ __('Delete success') }}");
@@ -113,20 +121,20 @@ class ProductController extends Controller
 
     public function DetailProduct($id)
     {
-        $product_image = $this->productRepository->DisplayProductImage($id);
+        $productImage = $this->productRepository->DisplayProductImage($id);
         $products = $this->productRepository->find($id);
         $categories = $this->productRepository->getAll();
-        $products_category = $this->productRepository->DisplayProductEvenCategory($id);
-        $products_sale = $this->productRepository->ShowPromotion_price($id);
+        $productsCategory = $this->productRepository->DisplayProductEvenCategory($id);
+        $productsSale = $this->productRepository->ShowPromotion_price($id);
         $comments = $this->productRepository->ShowProductComments($id);
-        $categories_detail = $this->productRepository->ShowProductCategory($id);
+        $categoriesDetail = $this->productRepository->ShowProductCategory($id);
         $events = $this->productRepository->ShowEvent($id);
         $category1 = $this->productRepository->categoryMenu();
         $parent1 = $this->productRepository->parentMenu();
 
         return view('products.detail', compact('categories', 'products'
-            , 'category1', 'parent1', 'products_sale', 'events'
-            , 'categories_detail', 'product_image', 'products_category', 'comments'));
+            , 'category1', 'parent1', 'productsSale', 'events'
+            , 'categoriesDetail', 'productImage', 'productsCategory', 'comments'));
     }
 
     public function getSearch(Request $request)
