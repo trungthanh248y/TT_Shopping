@@ -9,6 +9,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//Đoạn đăng nhập thì mới thực hiện check rưới quyền admin dc
+auth()->login(\App\User::find(1));
+
+
+
 Route::get('/', 'ProductController@ProductAllWelcome')->name('welcome');
 Auth::routes();
 Route::middleware('checkmanage')->group(function () {

@@ -40,6 +40,10 @@ abstract class ElequentRepository implements RepositoryInterface
     {
         return $this->model->create($arr);
     }
+    public function insert(array $arr)
+    {
+        return $this->model->insert($arr);
+    }
 
     public function delete($id)
     {

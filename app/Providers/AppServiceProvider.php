@@ -17,6 +17,7 @@ use App\Repositories\Eloquents\EventRepository;
 use App\Repositories\Eloquents\HomeRepository;
 use App\Repositories\Eloquents\ManageRepository;
 use App\Repositories\Eloquents\ProductRepositoryIn;
+use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Session;
@@ -38,6 +39,8 @@ class AppServiceProvider extends ServiceProvider
                     'totalPrice' => $cart->totalPrice, 'totalQty' => $cart->totalQty]);
             }
         });
+
+        Resource::withoutWrapping();
 
         Schema::defaultStringLength(191);
     }
