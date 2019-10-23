@@ -8,9 +8,11 @@
         "php": ">=7.0.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
+        "laravel/telescope": "^2.1",
         "laravel/tinker": "~1.0",
-        "nicolaslopezj/searchable": "^1.11"
+        "nicolaslopezj/searchable": "^1.12"
     },
+
     "require-dev": {
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",

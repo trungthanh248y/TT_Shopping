@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Contracts\EventRepositoryInterface;
+use App\Event;
+use App\Http\Resources\ResourceEvent;
 use App\ImageEvent;
 use App\Product;
 use Illuminate\Http\Request;
@@ -21,7 +23,8 @@ class EventController extends Controller
     {
         $events = $this->eventRepository->allEvent();
 
-        return view('events.home', compact('events'));
+//        return view('events.home', compact('events'));
+        return ResourceEvent::collection(Event::all());
     }
 
     public function create()
